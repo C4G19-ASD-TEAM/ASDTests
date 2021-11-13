@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 listaUsuarios.add(Usuario(edtNombre.text.toString(), edtClave.text.toString(), edtEmail.toString() ))
                 Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "Nombre no cumple", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Nombre no cumple caracteristicas", Toast.LENGTH_SHORT).show()
             }
 
 
