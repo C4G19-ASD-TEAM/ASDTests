@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Personal/MisionTic2022/Ciclo 4/ASDTests/app/src/main/res/layout/activity_main.xml" value="0.2234375" />
+        <entry key="..\:/Personal/MisionTic2022/Ciclo 4/ASDTests/app/src/main/res/layout/fragment_create_account.xml" value="0.2234375" />
+        <entry key="..\:/Personal/MisionTic2022/Ciclo 4/ASDTests/app/src/main/res/layout/fragment_create_account_detail.xml" value="0.2234375" />
+        <entry key="..\:/Personal/MisionTic2022/Ciclo 4/ASDTests/app/src/main/res/layout/fragment_new_account_created.xml" value="0.11979166666666667" />
+        <entry key="..\:/Personal/MisionTic2022/Ciclo 4/ASDTests/app/src/main/res/layout/fragment_politica_privacidad.xml" value="0.1" />
       </map>
     </option>
   </component>
