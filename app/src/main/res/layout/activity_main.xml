@@ -7,103 +7,35 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        ></LinearLayout>
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/cover"
+            ></ImageView>
+
+    </LinearLayout>
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:orientation="vertical"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre:"
-            >
-        </TextView>
-
-        <EditText
-            android:id="@+id/etNombre"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apellido:"
-            >
-        </TextView>
-
-        <EditText
-            android:id="@+id/etApellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Apellido"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Número de teléfono:"
-            >
-        </TextView>
-
-        <EditText
-            android:id="@+id/etNumTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Número de teléfono"
-            />
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="E-Mail:"
-            >
-        </TextView>
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="E-Mail"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clave:"
-            >
-        </TextView>
-        <EditText
-            android:id="@+id/etClave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="password"
-            />
-
-
-
-        <Button
-            android:id="@+id/btnCrear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Crear Cuenta"></Button>
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>
