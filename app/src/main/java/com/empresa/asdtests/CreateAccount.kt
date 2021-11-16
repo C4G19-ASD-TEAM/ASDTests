@@ -1,11 +1,14 @@
 package com.empresa.asdtests
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +40,8 @@ class CreateAccount : Fragment() {
         // Inflate the layout for this fragment
 
         val fragmento = inflater.inflate(R.layout.fragment_create_account, container, false)
-
         val btnCreateAccount = fragmento.findViewById<Button>(R.id.btnCreateAccount)
+        val btnSignIn = fragmento.findViewById<Button>(R.id.btnSignIn)
 
         btnCreateAccount.setOnClickListener {
 
@@ -54,6 +57,26 @@ class CreateAccount : Fragment() {
                 ?.addToBackStack("")
                 ?.commit()
         }
+
+
+        btnSignIn.setOnClickListener {
+
+            val edtUsername = fragmento.findViewById<EditText>(R.id.etUsername)
+            val edtPassword = fragmento.findViewById<EditText>(R.id.etPassword)
+
+            if(edtUsername.text.toString().equals("123")&&edtPassword.text.toString().equals("123")){
+                Toast.makeText(activity, "Ingreso OK", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(activity, ActivityPantallaPrincipal::class.java)
+                intent.putExtra("user", edtUsername.text.toString())
+                startActivity(intent)
+            }else
+            {
+                edtUsername.setError("Usuario o clave incorrecta. Usuario: 123")
+                edtPassword.setError("Usuario o clave incorrecta. Clave: 123")
+            }
+        }
+
 
         return fragmento
 
