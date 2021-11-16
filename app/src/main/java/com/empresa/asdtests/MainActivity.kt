@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //adicionar
-        if(savedInstanceState == null) { //guardar el estado de la actividad que se está mostrando
+        if (savedInstanceState == null) { //guardar el estado de la actividad que se está mostrando
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.fragmentContainerMain, CreateAccount::class.java, null, "Create Account")
@@ -31,6 +31,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+    }
 
 }
