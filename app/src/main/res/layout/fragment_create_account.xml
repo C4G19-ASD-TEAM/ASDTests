@@ -16,21 +16,26 @@
             android:layout_height="wrap_content"
             android:text="Username:"></TextView>
         <EditText
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
+            android:inputType="textEmailAddress"
             ></EditText>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password:"></TextView>
         <EditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:inputType="textPassword"
             ></EditText>
 
         <Button
+            android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign In"
