@@ -112,23 +112,6 @@ class FragmentCreateAccountDetail : Fragment() {
 
 
 
-        /*            if(validarNombre(edtNombre.text.toString())){
-                if(validarNombre(edtApellido.text.toString())){
-                    if(validarContraseña(edtClave.text.toString())){
-
-                        Toast.makeText(activity, "OK --> mostrar fragment ok", Toast.LENGTH_SHORT).show()
-
-                    }else{
-                        Toast.makeText(activity, "La clave debe tener longitud de más de 8 caracteres y contener almenos una letra minuscula, almenos una letra mayuscula y al menos un caracter especial", Toast.LENGTH_SHORT).show()
-
-                    }
-                }else{
-                    Toast.makeText(activity, "Apellido no cumple", Toast.LENGTH_SHORT).show()
-                }
-            }else{
-                Toast.makeText(activity, "Nombre no cumple", Toast.LENGTH_SHORT).show()
-            }*/
-
 
         }
 

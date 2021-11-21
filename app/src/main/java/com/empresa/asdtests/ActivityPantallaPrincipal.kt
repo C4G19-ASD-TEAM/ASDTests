@@ -20,7 +20,44 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         val tvUser = findViewById<TextView>(R.id.tvUser)
         val recibeParametrosIntent: Intent = intent
         var user: String? = recibeParametrosIntent.getStringExtra("user")
+        var isAdmin: Boolean? = recibeParametrosIntent.getBooleanExtra("isAdmin",false)
         tvUser.text = user
+
+
+        //si es usuario mostramos fragment de usuario o si es admin mostramos el fragment de admin
+
+        if(isAdmin == false){
+            //mostrar el segundofragmento
+            this?.getSupportFragmentManager()?.beginTransaction()
+                ?.setReorderingAllowed(true)
+                ?.replace(
+                    R.id.fragmentContainerPantallaPrincipal,
+                    FragmentUserPreguntas::class.java,
+                    null,
+                    "User Access Preguntas"
+                )
+                ?.addToBackStack("")
+                ?.commit()
+        }else{
+            //mostrar el fragmento de administrador
+            this?.getSupportFragmentManager()?.beginTransaction()
+                ?.setReorderingAllowed(true)
+                ?.replace(
+                    R.id.fragmentContainerPantallaPrincipal,
+                    FragmentAdminMenu::class.java,
+                    null,
+                    "Admin Access Preguntas"
+                )
+                ?.addToBackStack("")
+                ?.commit()
+
+        }
+
+
+
+
+
+
 
         //datos que va a mostrar
         val listaCategorias: ArrayList<Categoria> = ArrayList()

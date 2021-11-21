@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        //adicionar
+        //adicionar el fragment CreateAccount
         if (savedInstanceState == null) { //guardar el estado de la actividad que se está mostrando
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
