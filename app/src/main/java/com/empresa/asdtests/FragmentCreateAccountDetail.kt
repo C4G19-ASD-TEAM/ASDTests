@@ -45,6 +45,7 @@ class FragmentCreateAccountDetail : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val fragmento =  inflater.inflate(R.layout.fragment_create_account_detail, container, false)
+
         val btnCrearCuenta = fragmento.findViewById<Button>(R.id.btnCrearCuenta)
         val btnRegresar = fragmento.findViewById<Button>(R.id.btnRegresar)
         val btnPoliticaPrivacidad = fragmento.findViewById<Button>(R.id.btnPoliticaPrivacidad)
@@ -106,12 +107,7 @@ class FragmentCreateAccountDetail : Fragment() {
                     ?.addToBackStack("")
                     ?.commit()
 
-
             }
-
-
-
-
 
         }
 
@@ -166,29 +162,6 @@ class FragmentCreateAccountDetail : Fragment() {
         return matcher.matches();
     }
 
-/*
-    private fun validarContraseña (pass: String): Boolean {
-        var pattern: Pattern
-        var matcher: Matcher
-
-        val PATRON_CONTRASEÑA = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"
-        pattern = Pattern.compile(PATRON_CONTRASEÑA)
-        matcher = pattern.matcher(pass)
-
-        return matcher.matches();
-    }
-*/
-
-
-/*    private fun verificar(componente: EditText, tipo: String):String{
-
-        if(tipo.equals("nombre")){
-            if(componente.text.toString().isEmpty()){
-                return "Error"
-            }
-        }
-
-    }*/
 
     companion object {
         /**

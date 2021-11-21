@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentUserPreguntas">
+    tools:context=".FragmentUserPreguntas"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <EditText
+        android:id="@+id/etArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:hint="Area de la pregunta"
+        />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etPreText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Texto de la pregunta"
+        />
+
+    <EditText
+        android:id="@+id/etPreOpcion1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Opción de pregunta"
+        />
+
+    <EditText
+        android:id="@+id/etPreRespuesta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Respuesta correcta"
+        />
+
+    <Button
+        android:id="@+id/btnGuardarPregunta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"/>
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"/>
+
+
+
+
+</LinearLayout>
