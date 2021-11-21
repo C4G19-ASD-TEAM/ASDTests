@@ -32,6 +32,10 @@
     </LinearLayout>
 
 
+    <ListView
+        android:id="@+id/lvUsuarios"
+        android:layout_width="wrap_content"
+        android:layout_height="730dp"/>
 
 
     <LinearLayout
