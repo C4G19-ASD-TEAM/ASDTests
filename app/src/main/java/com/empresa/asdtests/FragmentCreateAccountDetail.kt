@@ -12,31 +12,20 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import com.empresa.asdtests.database.ASDTestsDB
+import com.empresa.asdtests.model.Usuario
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentCreateAccountDetail.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentCreateAccountDetail : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -57,6 +46,7 @@ class FragmentCreateAccountDetail : Fragment() {
             val edtNumTelefono = fragmento.findViewById<EditText>(R.id.etNumTelefono)
             val edtClave = fragmento.findViewById<EditText>(R.id.etClave)
             val cbAceptaTerminos = fragmento.findViewById<CheckBox>(R.id.cbAceptaTerminos)
+            val cbIsAdmin = fragmento.findViewById<CheckBox>(R.id.cbIsAdmin)
 
             var flagValidform: Boolean = false
 
@@ -92,8 +82,39 @@ class FragmentCreateAccountDetail : Fragment() {
             }
 
             if(flagValidform){
-                Toast.makeText(activity, "TODO OK", Toast.LENGTH_LONG).show()
+                //todo bien (form validado)
 
+                Toast.makeText(activity, "TODO OK... Insertando usuario en la base de datos", Toast.LENGTH_LONG).show()
+
+                //insertar en la BD
+                val context = activity?.applicationContext
+
+                //Instanciamos un objeto pelicula par Guardar en la BD
+                //val usuario =  Usuario( 0, "${edtTitulo.text}", edtDuracion.text.toString().toInt(), "${edtProtagonista.text}")
+
+                var role: String
+                if(cbIsAdmin.isChecked){
+                    role = "Admin"
+                }else{
+                    role = "User"
+                }
+
+
+                val usuario = Usuario(0, edtEmail.text.toString(), edtClave.text.toString(), role )
+
+
+                //insertamos en la BDs utilizando una Coroutine
+                CoroutineScope( Dispatchers.IO ).launch {
+                    val database = context?.let{ ASDTestsDB.getDataBase( it ) }
+                    if ( database != null){
+                        database.usuarioDAO().insert( usuario )
+                        Log.e("FG", "Entro a insertar")
+                        Log.e("FG", "Entro a insertar")
+
+                    }
+                }
+
+                //FIN INSERTAR USUARIO EN BD
 
                 //mostrar el segundofragmento
                 activity?.getSupportFragmentManager()?.beginTransaction()
@@ -163,23 +184,5 @@ class FragmentCreateAccountDetail : Fragment() {
     }
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentCreateAccountDetail.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentCreateAccountDetail().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

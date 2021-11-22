@@ -5,12 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.empresa.asdtests.dao.PreguntaDAO
+import com.empresa.asdtests.dao.UsuarioDAO
 import com.empresa.asdtests.model.Pregunta
+import com.empresa.asdtests.model.Usuario
 
-@Database (entities = [Pregunta::class], version = 1)
+@Database (entities = [Pregunta::class, Usuario::class], version = 1)
 abstract class ASDTestsDB : RoomDatabase() {
     //Operaciones de la BD
     abstract fun preguntaDAO() : PreguntaDAO
+    abstract fun usuarioDAO() : UsuarioDAO
 
     //Instancia BD
     companion object{

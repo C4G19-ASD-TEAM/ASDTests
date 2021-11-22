@@ -32,6 +32,17 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         tvUser.text = user
 
 /////////////////////////////////DATABASE//////////////////////////////
+
+
+/*
+        var pregunta: Pregunta = Pregunta(0,"aa", "bb", "cc", "dd")
+        var listaPreguntas: ArrayList<Pregunta> = ArrayList()
+        listaPreguntas.add(pregunta)
+        val adapter = PreguntasAdapter(this, listaPreguntas)
+        //mostrar en el listview
+        lvPreguntas.adapter = adapter
+*/
+
         //obtener la lista de las preguntas
         var listaPreguntas = emptyList<Pregunta>()
 

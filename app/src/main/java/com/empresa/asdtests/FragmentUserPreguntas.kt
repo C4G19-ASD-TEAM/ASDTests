@@ -33,8 +33,11 @@ class FragmentUserPreguntas : Fragment() {
             val context = activity?.applicationContext
 
 
-            //Instanciamos un objeto pelicula par Guardar en la BD
-            val pregunta = Pregunta(0, "aaa", "bbb", "ccc", "ddd" )
+            //Instanciamos un objeto pelicula para Guardar en la BD
+            //val pregunta = Pregunta(0, "aaa", "bbb", "ccc", "ddd" )
+
+            val pregunta = Pregunta(0, etArea.text.toString(), etPreText.text.toString(), etPreOpcion1.text.toString(), etPreRespuesta.text.toString())
+
 
             //insertamos en la BDs utilizando una Coroutine
             CoroutineScope(Dispatchers.IO).launch {
@@ -48,13 +51,15 @@ class FragmentUserPreguntas : Fragment() {
 
             }
 
-           val btnCancelar = fragmento.findViewById<Button>( R.id.btnCancelarAgregarPregunta)
-            btnCancelar.setOnClickListener {
-                salir()
-            }
+            salir()
+
         }
 
 
+        val btnCancelar = fragmento.findViewById<Button>( R.id.btnCancelarGuardarPregunta)
+        btnCancelar.setOnClickListener {
+            salir()
+        }
 
 
             return fragmento

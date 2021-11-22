@@ -11,11 +11,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
-    private var listaUsuarios: MutableList<Usuario> = mutableListOf(
-        Usuario("Juan", "123", "test@test.com"),
-        Usuario("Luis", "123", "test2@test2.com")
 
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

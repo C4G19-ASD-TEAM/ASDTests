@@ -26,17 +26,27 @@
         android:layout_weight="3"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Categoria"></TextView>
 
         <TextView
-            android:id="@+id/tvPreText"
+            android:id="@+id/tvRole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripcion"></TextView>
+            android:text="Rol"></TextView>
+
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"></TextView>
+
+
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"></TextView>
 
     </LinearLayout>
 

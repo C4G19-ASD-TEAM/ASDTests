@@ -6,6 +6,12 @@
     tools:context=".FragmentCreateAccountDetail"
     android:orientation="vertical">
 
+    <CheckBox
+        android:id="@+id/cbIsAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"></CheckBox>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
