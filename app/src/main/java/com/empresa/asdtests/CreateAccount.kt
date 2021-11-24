@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 
@@ -63,12 +64,14 @@ class CreateAccount : Fragment() {
 
             val edtUsername = fragmento.findViewById<EditText>(R.id.etUsername)
             val edtPassword = fragmento.findViewById<EditText>(R.id.etPassword)
+            //val cbIsAdmin = fragmento.findViewById<CheckBox>(R.id.cbIsAdmin)
 
             if(edtUsername.text.toString().equals("123")&&edtPassword.text.toString().equals("123")){
                 Toast.makeText(activity, "Ingreso OK", Toast.LENGTH_SHORT).show()
-
                 val intent = Intent(activity, ActivityPantallaPrincipal::class.java)
                 intent.putExtra("user", edtUsername.text.toString())
+                //intent.putExtra("isAdmin", cbIsAdmin.isChecked)
+
                 startActivity(intent)
             }else
             {

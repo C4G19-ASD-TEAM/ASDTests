@@ -11,18 +11,7 @@
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/cover"
-        ></ImageView>
-
-</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,20 +38,49 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="3"
+    android:orientation="vertical"
     >
 
+    <Button
+        android:id="@+id/btnAgregarPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Pregunta"></Button>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerCategorias"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                >
-
-            </androidx.recyclerview.widget.RecyclerView>
+    <Button
+        android:id="@+id/btnCancelarAgregarPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"></Button>
 
 
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerPantallaPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        ></androidx.fragment.app.FragmentContainerView>
+
+    <ListView
+        android:id="@+id/lvPreguntas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
+
+
+    <!--
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    -->
 
 </LinearLayout>
 
