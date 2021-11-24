@@ -1,32 +1,25 @@
 package com.empresa.asdtests
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import com.empresa.asdtests.database.ASDTestsDB
+import com.empresa.asdtests.model.Pregunta
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentPreguntaDetalleResponder.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentPreguntaDetalleResponder : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -34,26 +27,112 @@ class FragmentPreguntaDetalleResponder : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pregunta_detalle_responder, container, false)
+
+        val fragmento =  inflater.inflate(R.layout.fragment_pregunta_detalle_responder, container, false)
+
+        //contexto de la aplicacion}
+        val context = activity?.applicationContext
+
+        val idPregunta =  requireArguments().getInt("idPregunta")
+
+        Log.e("FG", "se recibió el id:"+idPregunta)
+        Toast.makeText(activity, "aca ok", Toast.LENGTH_SHORT).show()
+        verPregunta( fragmento, idPregunta )
+
+        fragmento.findViewById<ImageButton>( R.id.btnCancelar).setOnClickListener {
+            salir()
+        }
+
+        fragmento.findViewById<CheckBox>( R.id.chkEditar).setOnClickListener {
+            activarActualizar(fragmento, fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked )
+        }
+
+        fragmento.findViewById<ImageButton>( R.id.btnActualizar).setOnClickListener {
+            actualizarPregunta(fragmento, idPregunta)
+        }
+
+        fragmento.findViewById<ImageButton>( R.id.btnEliminar).setOnClickListener {
+            eliminarPregunta(idPregunta)
+        }
+
+        return fragmento
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentPreguntaDetalleResponder.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentPreguntaDetalleResponder().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+//funciones
+private fun eliminarPregunta(idPregunta: Int) {
+    CoroutineScope( Dispatchers.IO ).launch {
+        val database = context?.let { ASDTestsDB.getDataBase(it) }
+        val pelicula = Pregunta(idPregunta, "", "", "", "")
+        database?.preguntaDAO()?.eliminar(pelicula)
     }
+    salir()
+}
+
+    private fun actualizarPregunta(fragmento: View, idPregunta: Int) {
+        CoroutineScope( Dispatchers.IO).launch {
+            val database = context?.let { ASDTestsDB.getDataBase(it)}
+
+            val pelicula = Pregunta(
+                idPregunta,
+                fragmento.findViewById<EditText>(R.id.edtArea).text.toString(),
+                fragmento.findViewById<EditText>(R.id.edtPreguntaTexto).text.toString(),
+                fragmento.findViewById<EditText>(R.id.edtOpcion1).text.toString(),
+                fragmento.findViewById<EditText>(R.id.edtRespuesta).text.toString()
+            )
+            database?.preguntaDAO()?.actualizar(pelicula)
+        }
+        activarActualizar(fragmento, false)
+        fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked = false
+        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.GONE
+    }
+
+    private fun verPregunta( fragmento: View, idPregunta: Int) {
+        var  pregunta: Pregunta = Pregunta( 0, "", "" , "", "")
+
+        CoroutineScope( Dispatchers.IO ).launch {
+            //obtener la instancia de la BDs
+            val database = context?.let { ASDTestsDB.getDataBase(it) }
+
+            //consultamos la pregunta x ID en la BDs
+            pregunta = database?.preguntaDAO()?.getPregunta(idPregunta)!!
+
+            val edtArea = fragmento.findViewById<EditText>( R.id.edtArea)
+            val edtPreguntaTexto = fragmento.findViewById<EditText>( R.id.edtPreguntaTexto)
+            val edtOpcion1 = fragmento.findViewById<EditText>( R.id.edtOpcion1)
+            val edtRespuesta = fragmento.findViewById<EditText>( R.id.edtRespuesta)
+            edtArea.setText( pregunta.area )
+            edtPreguntaTexto.setText( pregunta.pretexto )
+            edtOpcion1.setText( pregunta.opcion1 )
+            edtRespuesta.setText( pregunta.respuesta )
+        }
+    }
+
+    private fun activarActualizar(fragmento: View, activo: Boolean ){
+        fragmento.findViewById<EditText>( R.id.edtArea).setEnabled( activo )
+        fragmento.findViewById<EditText>( R.id.edtPreguntaTexto).setEnabled( activo )
+        fragmento.findViewById<EditText>( R.id.edtOpcion1).setEnabled( activo )
+        fragmento.findViewById<EditText>( R.id.edtRespuesta).setEnabled( activo )
+
+        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.VISIBLE
+    }
+
+    private fun salir(){
+        val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )
+        lvPreguntas?.visibility = View.VISIBLE
+
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.remove( this )
+            ?.commit()
+    }
+//fin funciones    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

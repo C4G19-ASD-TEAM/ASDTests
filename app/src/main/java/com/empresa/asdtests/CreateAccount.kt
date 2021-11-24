@@ -64,13 +64,13 @@ class CreateAccount : Fragment() {
 
             val edtUsername = fragmento.findViewById<EditText>(R.id.etUsername)
             val edtPassword = fragmento.findViewById<EditText>(R.id.etPassword)
-            val cbIsAdmin = fragmento.findViewById<CheckBox>(R.id.cbIsAdmin)
+            //val cbIsAdmin = fragmento.findViewById<CheckBox>(R.id.cbIsAdmin)
 
             if(edtUsername.text.toString().equals("123")&&edtPassword.text.toString().equals("123")){
                 Toast.makeText(activity, "Ingreso OK", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity, ActivityPantallaPrincipal::class.java)
                 intent.putExtra("user", edtUsername.text.toString())
-                intent.putExtra("isAdmin", cbIsAdmin.isChecked)
+                //intent.putExtra("isAdmin", cbIsAdmin.isChecked)
 
                 startActivity(intent)
             }else

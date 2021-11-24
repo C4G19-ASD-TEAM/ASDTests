@@ -103,7 +103,7 @@ class FragmentCreateAccountDetail : Fragment() {
                 val usuario = Usuario(0, edtEmail.text.toString(), edtClave.text.toString(), role )
 
 
-                //insertamos en la BDs utilizando una Coroutine
+/*                //insertamos en la BDs utilizando una Coroutine
                 CoroutineScope( Dispatchers.IO ).launch {
                     val database = context?.let{ ASDTestsDB.getDataBase( it ) }
                     if ( database != null){
@@ -112,7 +112,7 @@ class FragmentCreateAccountDetail : Fragment() {
                         Log.e("FG", "Entro a insertar")
 
                     }
-                }
+                }*/
 
                 //FIN INSERTAR USUARIO EN BD
 

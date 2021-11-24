@@ -81,7 +81,7 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
             //recopilamos la información de la pelicula para enviarla al detallePelicula
             val pregunta = Bundle()
-            pregunta.putInt( "idPregunta", lvPreguntas[position].id )
+            pregunta.putInt( "idPregunta", listaPreguntas[position].id )
 
             lvPreguntas.visibility = View.GONE
 
