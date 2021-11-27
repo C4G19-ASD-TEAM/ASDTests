@@ -35,15 +35,53 @@ class MainActivity : AppCompatActivity() {
         if(currentUser != null){
             verActivityUsuarioLogueado();
         }else{
+
+
             //adicionar el fragment CreateAccount
-            if (savedInstanceState == null) { //guardar el estado de la actividad que se está mostrando
+/*            if (savedInstanceState == null) { //guardar el estado de la actividad que se está mostrando
                 supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.fragmentContainerMain, CreateAccount::class.java, null, "Create Account")
                     .commit()
+            }*/
+
+            binding.btnSignIn.setOnClickListener {
+
+                login(binding.etUsername.text.toString(), binding.etPassword.text.toString())
+
             }
 
+
+
+
+
+
+
         }
+
+
+
+    }
+
+    private fun login(email: String, password: String){
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("LOG TAG", "signInWithEmail:success")
+                    val user = auth.currentUser
+                    //updateUI(user)
+
+                    verActivityUsuarioLogueado()
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("LOG TAG", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    //updateUI(null)
+                }
+            }
 
 
 

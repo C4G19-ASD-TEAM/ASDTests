@@ -3,6 +3,8 @@ package com.empresa.asdtests
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.empresa.asdtests.database.ASDTestsDB
 import com.empresa.asdtests.model.Pregunta
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_pantalla_principal.*
 import kotlinx.android.synthetic.main.fragment_user_preguntas.*
 
@@ -19,10 +24,25 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var categoriasAdapter: RecyclerView.Adapter<CategoriasAdapter.ViewHolder>
+    private lateinit var auth: FirebaseAuth
+
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_principal)
+
+        setSupportActionBar(toolbarMyToolbar)
+
+        auth = Firebase.auth
+
+
 
         //recibir y mostrar datos que llegan en el intent desde el fragment
         val tvUser = findViewById<TextView>(R.id.tvUser)
@@ -145,18 +165,29 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         listaCategorias.add(Categoria(categoriaNombre = "Ciencias Naturales", categoriaDescripcion = "categoría de preguntas del tema de Ciencias Naturales", categoriaNumeroPreguntas = 10))
 
 
-/*
-
-
-        //mostramos Recycler View
-        val rvCategorias = findViewById<RecyclerView>(R.id.recyclerCategorias)
-        rvCategorias.layoutManager = LinearLayoutManager(this)
-        val adapterCategorias = CategoriasAdapter(listaCategorias)
-        rvCategorias.adapter = adapterCategorias
-
-*/
 
 
 
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.mnCerrarSesion -> {
+            Toast.makeText(this, "Cerrar", Toast.LENGTH_SHORT).show()
+            cerrarSesion()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    fun cerrarSesion(){
+        auth.signOut()
+        val intent = Intent(this, MainActivity::class.java)
+        this.startActivity(intent)
+    }
+
+
 }

@@ -53,7 +53,7 @@ class CreateAccount : Fragment() {
         binding.btnCreateAccount.setOnClickListener {
 
             //mostrar el segundofragmento
-            activity?.getSupportFragmentManager()?.beginTransaction()
+/*            activity?.getSupportFragmentManager()?.beginTransaction()
                 ?.setReorderingAllowed(true)
                 ?.replace(
                     R.id.fragmentContainerMain,
@@ -62,7 +62,7 @@ class CreateAccount : Fragment() {
                     "Crear Cuenta Detalle"
                 )
                 ?.addToBackStack("")
-                ?.commit()
+                ?.commit()*/
         }
 
 

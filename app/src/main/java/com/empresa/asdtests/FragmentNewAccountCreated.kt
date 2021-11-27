@@ -27,11 +27,11 @@ class FragmentNewAccountCreated : Fragment() {
 
 
         btnRegresar.setOnClickListener {
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
-                ?.remove(this)
-                ?.commit()
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
+//                ?.remove(this)
+//                ?.commit()
         }
 
 
