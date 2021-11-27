@@ -117,43 +117,43 @@ class FragmentCreateAccountDetail : Fragment() {
                 //FIN INSERTAR USUARIO EN BD
 
                 //mostrar el segundofragmento
-                activity?.getSupportFragmentManager()?.beginTransaction()
-                    ?.setReorderingAllowed(true)
-                    ?.replace(
-                        R.id.fragmentContainerMain,
-                        FragmentNewAccountCreated::class.java,
-                        null,
-                        "Cuenta creada"
-                    )
-                    ?.addToBackStack("")
-                    ?.commit()
+//                activity?.getSupportFragmentManager()?.beginTransaction()
+//                    ?.setReorderingAllowed(true)
+//                    ?.replace(
+//                        R.id.fragmentContainerMain,
+//                        FragmentNewAccountCreated::class.java,
+//                        null,
+//                        "Cuenta creada"
+//                    )
+//                    ?.addToBackStack("")
+//                    ?.commit()
 
             }
 
         }
 
         btnRegresar.setOnClickListener {
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
-                ?.remove(this)
-                ?.commit()
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
+//                ?.remove(this)
+//                ?.commit()
         }
 
 
         btnPoliticaPrivacidad.setOnClickListener {
 
-            //mostrar el fragmento de politica de privacidad
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(
-                    R.id.fragmentContainerMain,
-                    FragmentPoliticaPrivacidad::class.java,
-                    null,
-                    "Ver Politica Privacidad"
-                )
-                ?.addToBackStack("")
-                ?.commit()
+//            //mostrar el fragmento de politica de privacidad
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(
+//                    R.id.fragmentContainerMain,
+//                    FragmentPoliticaPrivacidad::class.java,
+//                    null,
+//                    "Ver Politica Privacidad"
+//                )
+//                ?.addToBackStack("")
+//                ?.commit()
         }
 
 

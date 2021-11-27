@@ -40,11 +40,11 @@ class FragmentPoliticaPrivacidad : Fragment() {
         val btnRegresarPolitica = fragmento.findViewById<Button>(R.id.btnRegresarPolitica)
 
         btnRegresarPolitica.setOnClickListener {
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(R.id.fragmentContainerMain, FragmentCreateAccountDetail::class.java, null, "CreateAccount")
-                ?.remove(this)
-                ?.commit()
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(R.id.fragmentContainerMain, FragmentCreateAccountDetail::class.java, null, "CreateAccount")
+//                ?.remove(this)
+//                ?.commit()
         }
 
 
