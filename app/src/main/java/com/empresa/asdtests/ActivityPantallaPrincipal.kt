@@ -14,6 +14,9 @@ import com.empresa.asdtests.databinding.ActivityPantallaPrincipalBinding
 import com.empresa.asdtests.model.Pregunta
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
@@ -22,8 +25,6 @@ import kotlinx.android.synthetic.main.fragment_user_preguntas.*
 
 class ActivityPantallaPrincipal : AppCompatActivity() {
 
-//    private lateinit var listRecyclerView: RecyclerView
-//    private lateinit var categoriasAdapter: RecyclerView.Adapter<CategoriasAdapter.ViewHolder>
     private lateinit var auth: FirebaseAuth
 
     private lateinit var binding : ActivityPantallaPrincipalBinding
@@ -58,25 +59,21 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         listaPreguntas = ArrayList<Pregunta>()
 
 
+        verListadoPreguntas()
 
-        //recibir y mostrar datos que llegan en el intent desde el fragment
-        val tvUser = findViewById<TextView>(R.id.tvUser)
-        val recibeParametrosIntent: Intent = intent
-        var user: String? = recibeParametrosIntent.getStringExtra("user")
-        var isAdmin: Boolean? = recibeParametrosIntent.getBooleanExtra("isAdmin",false)
-        tvUser.text = user
+        binding.lvPreguntas.setOnItemClickListener { parent, view, position, id ->
+            var pregunta = listaPreguntas[position]
 
-/////////////////////////////////DATABASE//////////////////////////////
+            Toast.makeText(this, "${pregunta}", Toast.LENGTH_SHORT ).show()
+
+            lvPreguntas.visibility = View.GONE
+            supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .replace( R.id.fragmentContainerPantallaPrincipal, FragmentEditarPregunta::class.java, null, "Preguntas" )
+                .commit()
 
 
-/*
-        var pregunta: Pregunta = Pregunta(0,"aa", "bb", "cc", "dd")
-        var listaPreguntas: ArrayList<Pregunta> = ArrayList()
-        listaPreguntas.add(pregunta)
-        val adapter = PreguntasAdapter(this, listaPreguntas)
-        //mostrar en el listview
-        lvPreguntas.adapter = adapter
-*/
+        }
 
 
 
@@ -93,6 +90,51 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
 
 
+
+
+
+    }
+
+    private fun verListadoPreguntas() {
+        val preguntaItemListener = object : ValueEventListener{
+            override fun onDataChange(datasnapshot: DataSnapshot) {
+
+                for (preg in datasnapshot.children){
+                    var pregunta = Pregunta( "", "", "", "", "")
+
+                    //objeto MAP
+                    val mapPregunta : Map<String, Any> = preg.value as HashMap<String, Any>
+
+                    pregunta.id = mapPregunta.get("id").toString()
+                    pregunta.area = mapPregunta.get("area").toString()
+                    pregunta.pretexto = mapPregunta.get("pretexto").toString()
+                    pregunta.opcion1 = mapPregunta.get("opcion1").toString()
+                    pregunta.respuesta = mapPregunta.get("respuesta").toString()
+
+
+                    listaPreguntas.add(pregunta)
+
+
+                    //linkear adapter
+
+                    preguntaAdapter = PreguntasAdapter(this@ActivityPantallaPrincipal, listaPreguntas)
+                    binding.lvPreguntas.adapter = preguntaAdapter
+
+
+                }
+
+
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        dbReferencePreguntas.addValueEventListener(preguntaItemListener)
 
 
 
@@ -116,6 +158,9 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
     }
+
+
+
 
 
 }

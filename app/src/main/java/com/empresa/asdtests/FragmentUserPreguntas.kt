@@ -72,7 +72,7 @@ class FragmentUserPreguntas : Fragment() {
                 })
 
             val alert = dialogBuilder.create()
-            alert.setTitle("Test")
+            alert.setTitle("ASDTests")
             alert.setMessage("Estas seguro de agregar esta pregunta?")
             alert.setCancelable(false)
 

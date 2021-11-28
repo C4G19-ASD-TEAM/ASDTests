@@ -7,13 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.empresa.asdtests.databinding.FragmentCreateAccountBinding
+import com.empresa.asdtests.databinding.FragmentEditarPreguntaBinding
 
 
-class FragmentPreguntaDetalleResponder : Fragment() {
+class FragmentEditarPregunta : Fragment() {
 
+    private var _binding: FragmentEditarPreguntaBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,35 +26,49 @@ class FragmentPreguntaDetalleResponder : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        val fragmento =  inflater.inflate(R.layout.fragment_pregunta_detalle_responder, container, false)
-
-        //contexto de la aplicacion}
-        val context = activity?.applicationContext
+        _binding = FragmentEditarPreguntaBinding.inflate(inflater, container, false)
 
         val idPregunta =  requireArguments().getInt("idPregunta")
 
         Log.e("FG", "se recibió el id:"+idPregunta)
         Toast.makeText(activity, "aca ok", Toast.LENGTH_SHORT).show()
-        verPregunta( fragmento, idPregunta )
 
-        fragmento.findViewById<ImageButton>( R.id.btnCancelar).setOnClickListener {
-            salir()
-        }
 
-        fragmento.findViewById<CheckBox>( R.id.chkEditar).setOnClickListener {
-            activarActualizar(fragmento, fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked )
-        }
 
-        fragmento.findViewById<ImageButton>( R.id.btnActualizar).setOnClickListener {
-            actualizarPregunta(fragmento, idPregunta)
-        }
 
-        fragmento.findViewById<ImageButton>( R.id.btnEliminar).setOnClickListener {
-            eliminarPregunta(idPregunta)
-        }
+        //val fragmento =  inflater.inflate(R.layout.fragment_editar_pregunta, container, false)
+//
+//        //contexto de la aplicacion}
+//        val context = activity?.applicationContext
+//
+//        val idPregunta =  requireArguments().getInt("idPregunta")
+//
+//        Log.e("FG", "se recibió el id:"+idPregunta)
+//        Toast.makeText(activity, "aca ok", Toast.LENGTH_SHORT).show()
+//        verPregunta( fragmento, idPregunta )
+//
+//        fragmento.findViewById<ImageButton>( R.id.btnCancelar).setOnClickListener {
+//            salir()
+//        }
+//
+//        fragmento.findViewById<CheckBox>( R.id.chkEditar).setOnClickListener {
+//            activarActualizar(fragmento, fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked )
+//        }
+//
+//        fragmento.findViewById<ImageButton>( R.id.btnActualizar).setOnClickListener {
+//            actualizarPregunta(fragmento, idPregunta)
+//        }
+//
+//        fragmento.findViewById<ImageButton>( R.id.btnEliminar).setOnClickListener {
+//            eliminarPregunta(idPregunta)
+//        }
 
-        return fragmento
+
+        return binding.root
+
+    //return fragmento
+
+
 
     }
 
