@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.empresa.asdtests.database.ASDTestsDB
-import com.empresa.asdtests.model.Pregunta
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,51 +59,51 @@ class FragmentPreguntaDetalleResponder : Fragment() {
 
 //funciones
 private fun eliminarPregunta(idPregunta: Int) {
-    CoroutineScope( Dispatchers.IO ).launch {
-        val database = context?.let { ASDTestsDB.getDataBase(it) }
-        val pelicula = Pregunta(idPregunta, "", "", "", "")
-        database?.preguntaDAO()?.eliminar(pelicula)
-    }
-    salir()
+//    CoroutineScope( Dispatchers.IO ).launch {
+//        val database = context?.let { ASDTestsDB.getDataBase(it) }
+//        val pelicula = Pregunta(idPregunta, "", "", "", "")
+//        database?.preguntaDAO()?.eliminar(pelicula)
+//    }
+//    salir()
 }
 
     private fun actualizarPregunta(fragmento: View, idPregunta: Int) {
-        CoroutineScope( Dispatchers.IO).launch {
-            val database = context?.let { ASDTestsDB.getDataBase(it)}
-
-            val pelicula = Pregunta(
-                idPregunta,
-                fragmento.findViewById<EditText>(R.id.edtArea).text.toString(),
-                fragmento.findViewById<EditText>(R.id.edtPreguntaTexto).text.toString(),
-                fragmento.findViewById<EditText>(R.id.edtOpcion1).text.toString(),
-                fragmento.findViewById<EditText>(R.id.edtRespuesta).text.toString()
-            )
-            database?.preguntaDAO()?.actualizar(pelicula)
-        }
-        activarActualizar(fragmento, false)
-        fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked = false
-        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.GONE
+//        CoroutineScope( Dispatchers.IO).launch {
+//            val database = context?.let { ASDTestsDB.getDataBase(it)}
+//
+//            val pelicula = Pregunta(
+//                idPregunta,
+//                fragmento.findViewById<EditText>(R.id.edtArea).text.toString(),
+//                fragmento.findViewById<EditText>(R.id.edtPreguntaTexto).text.toString(),
+//                fragmento.findViewById<EditText>(R.id.edtOpcion1).text.toString(),
+//                fragmento.findViewById<EditText>(R.id.edtRespuesta).text.toString()
+//            )
+//            database?.preguntaDAO()?.actualizar(pelicula)
+//        }
+//        activarActualizar(fragmento, false)
+//        fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked = false
+//        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.GONE
     }
 
     private fun verPregunta( fragmento: View, idPregunta: Int) {
-        var  pregunta: Pregunta = Pregunta( 0, "", "" , "", "")
-
-        CoroutineScope( Dispatchers.IO ).launch {
-            //obtener la instancia de la BDs
-            val database = context?.let { ASDTestsDB.getDataBase(it) }
-
-            //consultamos la pregunta x ID en la BDs
-            pregunta = database?.preguntaDAO()?.getPregunta(idPregunta)!!
-
-            val edtArea = fragmento.findViewById<EditText>( R.id.edtArea)
-            val edtPreguntaTexto = fragmento.findViewById<EditText>( R.id.edtPreguntaTexto)
-            val edtOpcion1 = fragmento.findViewById<EditText>( R.id.edtOpcion1)
-            val edtRespuesta = fragmento.findViewById<EditText>( R.id.edtRespuesta)
-            edtArea.setText( pregunta.area )
-            edtPreguntaTexto.setText( pregunta.pretexto )
-            edtOpcion1.setText( pregunta.opcion1 )
-            edtRespuesta.setText( pregunta.respuesta )
-        }
+//        var  pregunta: Pregunta = Pregunta( 0, "", "" , "", "")
+//
+//        CoroutineScope( Dispatchers.IO ).launch {
+//            //obtener la instancia de la BDs
+//            val database = context?.let { ASDTestsDB.getDataBase(it) }
+//
+//            //consultamos la pregunta x ID en la BDs
+//            pregunta = database?.preguntaDAO()?.getPregunta(idPregunta)!!
+//
+//            val edtArea = fragmento.findViewById<EditText>( R.id.edtArea)
+//            val edtPreguntaTexto = fragmento.findViewById<EditText>( R.id.edtPreguntaTexto)
+//            val edtOpcion1 = fragmento.findViewById<EditText>( R.id.edtOpcion1)
+//            val edtRespuesta = fragmento.findViewById<EditText>( R.id.edtRespuesta)
+//            edtArea.setText( pregunta.area )
+//            edtPreguntaTexto.setText( pregunta.pretexto )
+//            edtOpcion1.setText( pregunta.opcion1 )
+//            edtRespuesta.setText( pregunta.respuesta )
+//        }
     }
 
     private fun activarActualizar(fragmento: View, activo: Boolean ){

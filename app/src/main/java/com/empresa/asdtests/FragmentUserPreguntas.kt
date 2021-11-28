@@ -1,79 +1,115 @@
 package com.empresa.asdtests
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
-import com.empresa.asdtests.database.ASDTestsDB
-import com.empresa.asdtests.database.ASDTestsDB_Impl
+import com.empresa.asdtests.databinding.FragmentUserPreguntasBinding
 import com.empresa.asdtests.model.Pregunta
-import kotlinx.android.synthetic.main.fragment_user_preguntas.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
+import java.util.*
 
 
 class FragmentUserPreguntas : Fragment() {
+
+    private var _binding: FragmentUserPreguntasBinding? = null
+    private val binding get() = _binding!!
+
+    val database = Firebase.database
+    val dbReferencePreguntas = database.getReference("preguntas")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        val fragmento = inflater.inflate(R.layout.fragment_user_preguntas, container, false)
+        _binding = FragmentUserPreguntasBinding.inflate(inflater, container, false)
 
-        val btnGuardarPregunta = fragmento.findViewById<Button>(R.id.btnGuardarPregunta)
+        //se inicializa (si estamos en una actividad el contexto es this
+        Firebase.initialize(requireActivity())
 
-        btnGuardarPregunta.setOnClickListener {
-            val context = activity?.applicationContext
+        binding.btnGuardarPregunta.setOnClickListener {
+            //val context = activity?.applicationContext
+
+            var pregunta = Pregunta (
+
+                UUID.randomUUID().toString(),
+                binding.etArea.text.toString(),
+                binding.etPreText.text.toString(),
+                binding.etPreOpcion1.text.toString(),
+                binding.etPreRespuesta.text.toString()
+
+            )
 
 
-            //Instanciamos un objeto pelicula para Guardar en la BD
-            //val pregunta = Pregunta(0, "aaa", "bbb", "ccc", "ddd" )
-
-            val pregunta = Pregunta(0, etArea.text.toString(), etPreText.text.toString(), etPreOpcion1.text.toString(), etPreRespuesta.text.toString())
 
 
-            //insertamos en la BDs utilizando una Coroutine
-            CoroutineScope(Dispatchers.IO).launch {
-                val database = context?.let { ASDTestsDB.getDataBase(it) }
-                if (database != null) {
-                    database.preguntaDAO().insert(pregunta)
-                    Log.e("FG", "Ingresó a insertar pregunta")
-                }else{
-                    Toast.makeText(activity, "DB null - Click en Guardar pregunta", Toast.LENGTH_SHORT).show()
-                }
+            val dialogBuilder = AlertDialog.Builder(requireActivity())
 
-            }
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                        dialog, id ->
 
-            salir()
+                    dbReferencePreguntas.child(pregunta.id).setValue(pregunta)
+
+                    Toast.makeText(requireActivity(), "Pregunta agregada con éxito", Toast.LENGTH_SHORT).show()
+                    limpiarForm()
+                    dialog.dismiss()
+
+                })
+
+                .setNegativeButton("Cancel", { dialog, whichButton ->
+
+                })
+
+            val alert = dialogBuilder.create()
+            alert.setTitle("Test")
+            alert.setMessage("Estas seguro de agregar esta pregunta?")
+            alert.setCancelable(false)
+
+            alert.show()
+
+
+
+
+
 
         }
 
 
-        val btnCancelar = fragmento.findViewById<Button>( R.id.btnCancelarGuardarPregunta)
-        btnCancelar.setOnClickListener {
-            salir()
+        binding.btnCancelarGuardarPregunta.setOnClickListener {
+            //salir()
         }
 
-
-            return fragmento
+        return binding.root
 
     }
 
-    private fun salir(){
-        val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )
-        lvPreguntas?.visibility = View.VISIBLE
+    private fun limpiarForm() {
+        binding.etArea.setText("")
+        binding.etPreText.setText("")
+        binding.etPreRespuesta.setText("")
+        binding.etPreOpcion1.setText("")
 
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.remove( this )
-            ?.commit()
     }
+
+//    private fun salir(){
+//        val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )
+//        lvPreguntas?.visibility = View.VISIBLE
+//
+//        activity?.supportFragmentManager?.beginTransaction()
+//            ?.remove( this )
+//            ?.commit()
+//    }
 
 
 }

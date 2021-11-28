@@ -1,15 +1,10 @@
 package com.empresa.asdtests
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import com.empresa.asdtests.database.ASDTestsDB
-import com.empresa.asdtests.database.ASDTestsDB_Impl
-import com.empresa.asdtests.model.Pregunta
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

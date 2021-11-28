@@ -52,7 +52,11 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+            binding.btnCreateAccount.setOnClickListener {
 
+                verActivityCreateAccount()
+
+            }
 
 
 
@@ -104,6 +108,12 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityPantallaPrincipal::class.java)
         this.startActivity(intent)
     }
+
+    private fun verActivityCreateAccount(){
+        val intent = Intent(this, ActivityCreateAccount::class.java)
+        this.startActivity(intent)
+    }
+
 
 
 }
