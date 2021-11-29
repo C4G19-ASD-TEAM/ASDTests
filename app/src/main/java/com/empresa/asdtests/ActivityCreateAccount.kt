@@ -4,13 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
 import com.empresa.asdtests.databinding.ActivityCreateAccountBinding
+import com.empresa.asdtests.model.Pregunta
+import com.empresa.asdtests.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
+import kotlinx.android.synthetic.main.fragment_create_account_detail.*
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -19,6 +26,9 @@ class ActivityCreateAccount : AppCompatActivity() {
     private lateinit var binding : ActivityCreateAccountBinding
     private lateinit var auth: FirebaseAuth
 
+    val database = Firebase.database
+    val dbReferenceUsuarios = database.getReference("usuarios")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +36,9 @@ class ActivityCreateAccount : AppCompatActivity() {
         binding = ActivityCreateAccountBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_create_account)
         setContentView(binding.root)
+
+        //inicializar firebase firestore
+        Firebase.initialize(this)
 
         auth = Firebase.auth
 
@@ -44,6 +57,7 @@ class ActivityCreateAccount : AppCompatActivity() {
     private fun registrarUsuario(){
         val email = binding.etEmail.text.toString()
         val pass = binding.etClave.text.toString()
+
 
 
 /////////////////validacion de campos/////////////
@@ -94,7 +108,9 @@ class ActivityCreateAccount : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = auth.currentUser
 
-                        //mostrar la ventana principal de la aplicación
+                        Log.e("FB", "user ID: " + user?.uid.toString())
+
+                        guardarDatosUsuario(user?.uid.toString())
                         verActivityUsuarioLogueado()
                     } else {
                         Toast.makeText(baseContext, "Authentication failed.",
@@ -104,9 +120,39 @@ class ActivityCreateAccount : AppCompatActivity() {
 
 
 
+
+
         }
 
 
+
+
+
+
+
+    }
+
+    private fun guardarDatosUsuario(userId: String) {
+
+        var rolUsuario: String
+
+        if(binding.cbIsAdmin.isChecked){
+            rolUsuario = "Admin"
+        }else{
+            rolUsuario = "User"
+        }
+
+
+        var usuario = Usuario (
+            userId,
+            binding.etEmail.text.toString(),
+            rolUsuario,
+            binding.etNombre.text.toString(),
+            binding.etApellido.text.toString(),
+            binding.etNumTelefono.text.toString()
+        )
+
+        dbReferenceUsuarios.child(usuario.id).setValue(usuario)
 
 
     }

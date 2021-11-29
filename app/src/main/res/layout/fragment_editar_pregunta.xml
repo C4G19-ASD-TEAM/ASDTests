@@ -7,20 +7,29 @@
         android:orientation="vertical"
         android:layout_margin="20dp">
 
-        <EditText
-            android:id="@+id/edtArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Area"
-            android:enabled="false"
-            />
+    <EditText
+        android:id="@+id/edtId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Area"
+        android:enabled="false"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:id="@+id/edtArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Area"
+
+        />
 
         <EditText
             android:id="@+id/edtPreguntaTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pregunta"
-            android:enabled="false"
+
             />
 
     <EditText
@@ -28,14 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Respuesta Opción 1"
-        android:enabled="false"
+
         />
     <EditText
         android:id="@+id/edtRespuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Respuesta Correcta"
-        android:enabled="false"
+
         />
 
         <CheckBox
@@ -55,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_save"
-            android:visibility="gone"
+
             />
 
         <ImageButton

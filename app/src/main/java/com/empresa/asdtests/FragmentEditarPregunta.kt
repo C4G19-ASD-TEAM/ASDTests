@@ -9,12 +9,20 @@ import android.view.ViewGroup
 import android.widget.*
 import com.empresa.asdtests.databinding.FragmentCreateAccountBinding
 import com.empresa.asdtests.databinding.FragmentEditarPreguntaBinding
+import com.empresa.asdtests.model.Pregunta
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
+import kotlinx.android.synthetic.main.fragment_editar_pregunta.*
 
 
 class FragmentEditarPregunta : Fragment() {
 
     private var _binding: FragmentEditarPreguntaBinding? = null
     private val binding get() = _binding!!
+
+    val database = Firebase.database
+    val dbReferencePreguntas = database.getReference("preguntas")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,48 +33,35 @@ class FragmentEditarPregunta : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         _binding = FragmentEditarPreguntaBinding.inflate(inflater, container, false)
 
-        val idPregunta =  requireArguments().getInt("idPregunta")
+        //se inicializa (si estamos en una actividad el contexto es this
+        Firebase.initialize(requireActivity())
 
-        Log.e("FG", "se recibió el id:"+idPregunta)
-        Toast.makeText(activity, "aca ok", Toast.LENGTH_SHORT).show()
+        val id =  requireArguments().getString("id")
+        val area =  requireArguments().getString("area")
+        val pretexto =  requireArguments().getString("pretexto")
+        val opcion1 =  requireArguments().getString("opcion1")
+        val respuesta =  requireArguments().getString("respuesta")
+
+        binding.edtId.setText(id)
+        binding.edtArea.setText(area)
+        binding.edtPreguntaTexto.setText(pretexto)
+        binding.edtOpcion1.setText(opcion1)
+        binding.edtRespuesta.setText(respuesta)
 
 
+        binding.btnActualizar.setOnClickListener {
+            actualizarPregunta()
+
+        }
 
 
-        //val fragmento =  inflater.inflate(R.layout.fragment_editar_pregunta, container, false)
-//
-//        //contexto de la aplicacion}
-//        val context = activity?.applicationContext
-//
-//        val idPregunta =  requireArguments().getInt("idPregunta")
-//
-//        Log.e("FG", "se recibió el id:"+idPregunta)
-//        Toast.makeText(activity, "aca ok", Toast.LENGTH_SHORT).show()
-//        verPregunta( fragmento, idPregunta )
-//
-//        fragmento.findViewById<ImageButton>( R.id.btnCancelar).setOnClickListener {
-//            salir()
-//        }
-//
-//        fragmento.findViewById<CheckBox>( R.id.chkEditar).setOnClickListener {
-//            activarActualizar(fragmento, fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked )
-//        }
-//
-//        fragmento.findViewById<ImageButton>( R.id.btnActualizar).setOnClickListener {
-//            actualizarPregunta(fragmento, idPregunta)
-//        }
-//
-//        fragmento.findViewById<ImageButton>( R.id.btnEliminar).setOnClickListener {
-//            eliminarPregunta(idPregunta)
-//        }
 
 
         return binding.root
-
-    //return fragmento
 
 
 
@@ -82,53 +77,22 @@ private fun eliminarPregunta(idPregunta: Int) {
 //    salir()
 }
 
-    private fun actualizarPregunta(fragmento: View, idPregunta: Int) {
-//        CoroutineScope( Dispatchers.IO).launch {
-//            val database = context?.let { ASDTestsDB.getDataBase(it)}
-//
-//            val pelicula = Pregunta(
-//                idPregunta,
-//                fragmento.findViewById<EditText>(R.id.edtArea).text.toString(),
-//                fragmento.findViewById<EditText>(R.id.edtPreguntaTexto).text.toString(),
-//                fragmento.findViewById<EditText>(R.id.edtOpcion1).text.toString(),
-//                fragmento.findViewById<EditText>(R.id.edtRespuesta).text.toString()
-//            )
-//            database?.preguntaDAO()?.actualizar(pelicula)
-//        }
-//        activarActualizar(fragmento, false)
-//        fragmento.findViewById<CheckBox>( R.id.chkEditar).isChecked = false
-//        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.GONE
+    private fun actualizarPregunta() {
+
+        var pregunta : Pregunta = Pregunta (
+            edtId.text.toString(),
+            edtArea.text.toString(),
+            edtPreguntaTexto.text.toString(),
+            edtOpcion1.text.toString(),
+            edtRespuesta.text.toString())
+
+        dbReferencePreguntas.child(pregunta.id).setValue(pregunta)
+
+        salir()
+
     }
 
-    private fun verPregunta( fragmento: View, idPregunta: Int) {
-//        var  pregunta: Pregunta = Pregunta( 0, "", "" , "", "")
-//
-//        CoroutineScope( Dispatchers.IO ).launch {
-//            //obtener la instancia de la BDs
-//            val database = context?.let { ASDTestsDB.getDataBase(it) }
-//
-//            //consultamos la pregunta x ID en la BDs
-//            pregunta = database?.preguntaDAO()?.getPregunta(idPregunta)!!
-//
-//            val edtArea = fragmento.findViewById<EditText>( R.id.edtArea)
-//            val edtPreguntaTexto = fragmento.findViewById<EditText>( R.id.edtPreguntaTexto)
-//            val edtOpcion1 = fragmento.findViewById<EditText>( R.id.edtOpcion1)
-//            val edtRespuesta = fragmento.findViewById<EditText>( R.id.edtRespuesta)
-//            edtArea.setText( pregunta.area )
-//            edtPreguntaTexto.setText( pregunta.pretexto )
-//            edtOpcion1.setText( pregunta.opcion1 )
-//            edtRespuesta.setText( pregunta.respuesta )
-//        }
-    }
 
-    private fun activarActualizar(fragmento: View, activo: Boolean ){
-        fragmento.findViewById<EditText>( R.id.edtArea).setEnabled( activo )
-        fragmento.findViewById<EditText>( R.id.edtPreguntaTexto).setEnabled( activo )
-        fragmento.findViewById<EditText>( R.id.edtOpcion1).setEnabled( activo )
-        fragmento.findViewById<EditText>( R.id.edtRespuesta).setEnabled( activo )
-
-        fragmento.findViewById<ImageButton>(R.id.btnActualizar).visibility = View.VISIBLE
-    }
 
     private fun salir(){
         val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )

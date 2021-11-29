@@ -59,17 +59,45 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
         listaPreguntas = ArrayList<Pregunta>()
 
 
-        verListadoPreguntas()
+        //segun el rol que muestra
+
+        var role = intent.getStringExtra("role")
+
+        Toast.makeText(this, "aca el role es: "+role, Toast.LENGTH_SHORT).show()
+
+        tvUser.setText(role).toString()
+
+        if(role.equals("Admin")){
+            verListadoPreguntas()
+        }else{
+            binding.btnAgregarPregunta.visibility = View.GONE
+
+        }
+
+
+        binding.btnGenerarTest.setOnClickListener {
+            verTest()
+        }
+
 
         binding.lvPreguntas.setOnItemClickListener { parent, view, position, id ->
             var pregunta = listaPreguntas[position]
+
+
+            val args = Bundle ()
+            args.putString("id", pregunta.id)
+            args.putString("area", pregunta.area)
+            args.putString("pretexto", pregunta.pretexto)
+            args.putString("opcion1", pregunta.opcion1)
+            args.putString("respuesta", pregunta.respuesta)
+
 
             Toast.makeText(this, "${pregunta}", Toast.LENGTH_SHORT ).show()
 
             lvPreguntas.visibility = View.GONE
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
-                .replace( R.id.fragmentContainerPantallaPrincipal, FragmentEditarPregunta::class.java, null, "Preguntas" )
+                .replace( R.id.fragmentContainerPantallaPrincipal, FragmentEditarPregunta::class.java, args, "Preguntas" )
                 .commit()
 
 
@@ -91,7 +119,19 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
 
 
+        btnCerrarSesion.setOnClickListener {
 
+            cerrarSesion()
+
+        }
+
+
+    }
+
+    private fun verTest() {
+
+        val intent = Intent(this, ActivityRealizarTest::class.java)
+        this.startActivity(intent)
 
     }
 
