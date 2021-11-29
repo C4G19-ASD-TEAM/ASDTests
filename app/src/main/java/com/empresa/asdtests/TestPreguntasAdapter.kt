@@ -1,5 +1,6 @@
 package com.empresa.asdtests
 
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +11,15 @@ import com.empresa.asdtests.databinding.PreguntasItemBinding
 import com.empresa.asdtests.model.Pregunta
 
 
-class PreguntasAdapter (private val mContext: Context, val listaPreguntas: List<Pregunta>)
-    : ArrayAdapter<Pregunta>( mContext, 0, listaPreguntas ){
+class TestPreguntasAdapter (private val mContext: Context, val listaTestPreguntas: List<Pregunta>)
+    : ArrayAdapter<Pregunta>( mContext, 0, listaTestPreguntas ){
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-        val layout = LayoutInflater.from(mContext).inflate(R.layout.preguntas_item,parent,false)
+        val layout = LayoutInflater.from(mContext).inflate(R.layout.test_preguntas_item,parent,false)
 
-        val pregunta = listaPreguntas[position]
+        val pregunta = listaTestPreguntas[position]
         layout.findViewById<TextView>(R.id.tvId).text = pregunta.id
         layout.findViewById<TextView>(R.id.tvArea).text = pregunta.area
         layout.findViewById<TextView>(R.id.tvPreText).text = pregunta.pretexto

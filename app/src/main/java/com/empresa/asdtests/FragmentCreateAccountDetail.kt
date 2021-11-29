@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import com.empresa.asdtests.database.ASDTestsDB
 import com.empresa.asdtests.model.Usuario
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -98,35 +97,6 @@ class FragmentCreateAccountDetail : Fragment() {
                 }else{
                     role = "User"
                 }
-
-
-                val usuario = Usuario(0, edtEmail.text.toString(), edtClave.text.toString(), role )
-
-
-/*                //insertamos en la BDs utilizando una Coroutine
-                CoroutineScope( Dispatchers.IO ).launch {
-                    val database = context?.let{ ASDTestsDB.getDataBase( it ) }
-                    if ( database != null){
-                        database.usuarioDAO().insert( usuario )
-                        Log.e("FG", "Entro a insertar")
-                        Log.e("FG", "Entro a insertar")
-
-                    }
-                }*/
-
-                //FIN INSERTAR USUARIO EN BD
-
-                //mostrar el segundofragmento
-//                activity?.getSupportFragmentManager()?.beginTransaction()
-//                    ?.setReorderingAllowed(true)
-//                    ?.replace(
-//                        R.id.fragmentContainerMain,
-//                        FragmentNewAccountCreated::class.java,
-//                        null,
-//                        "Cuenta creada"
-//                    )
-//                    ?.addToBackStack("")
-//                    ?.commit()
 
             }
 

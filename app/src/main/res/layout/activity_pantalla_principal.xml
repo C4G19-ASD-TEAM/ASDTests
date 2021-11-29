@@ -30,14 +30,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User: "></TextView>
+            android:text="Role de usuario: "></TextView>
 
 
         <TextView
             android:id="@+id/tvUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"></TextView>
+            ></TextView>
 
     </LinearLayout>
 
@@ -56,12 +56,19 @@
         android:text="Agregar Pregunta"></Button>
 
     <Button
-        android:id="@+id/btnCancelarAgregarPregunta"
+        android:id="@+id/btnGenerarTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"></Button>
+        android:text="Generar Test"></Button>
 
 
+
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cerrar Sesion"></Button>
 
 
     <androidx.fragment.app.FragmentContainerView
