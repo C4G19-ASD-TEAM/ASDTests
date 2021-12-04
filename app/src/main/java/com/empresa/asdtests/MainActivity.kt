@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     val dbReferenceUsuarios = database.getReference("usuarios")
 
     //otras variables
-    //private lateinit var listaUsuarios: ArrayList<Usuario>
+    private lateinit var listaUsuarios: ArrayList<Usuario>
     private lateinit var role: String
 
 
@@ -54,7 +54,11 @@ class MainActivity : AppCompatActivity() {
         Firebase.initialize(this)
         auth = Firebase.auth
 
-        //listaUsuarios = ArrayList<Usuario>()
+        listaUsuarios = ArrayList<Usuario>()
+
+
+
+
 
         role = "User"
 
@@ -103,6 +107,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+    //Otras funciones
+
 
     private fun login(email: String, password: String){
 
@@ -212,10 +222,10 @@ class MainActivity : AppCompatActivity() {
                     //listaUsuarios.add(usuario)
 
 
-                    if(uid.equals(usuario.id)){
-                        role = usuario.role
-                        Log.e("FB", "uid aca: "+usuario.id +" y el enviado es: "+uid +"y el role es:"+role )
-                    }
+//                    if(uid.equals(usuario.id)){
+//                        role = usuario.role
+//                        Log.e("FB", "uid aca: "+usuario.id +" y el enviado es: "+uid +"y el role es:"+role )
+//                    }
 
 
                 }
@@ -239,6 +249,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun obtenerRol(usuarios: List<Usuario>, userId: String):String{
+        var rol: String
+        rol = "Unknown"
+        Log.e("FG", "Lista "+usuarios.size)
+        //Log.e("FG", "U0 "+usuarios[0].nombre)
+
+        for ( u in usuarios){
+
+            Log.e("FG", "el uId es "+u.id)
+            if (userId==u.id){
+                rol = u.role
+            }
+        }
+        return rol
+
+    }
 
 
 }
