@@ -14,6 +14,7 @@ import com.empresa.asdtests.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 import kotlinx.android.synthetic.main.fragment_create_account_detail.*
@@ -26,8 +27,9 @@ class ActivityCreateAccount : AppCompatActivity() {
     private lateinit var binding : ActivityCreateAccountBinding
     private lateinit var auth: FirebaseAuth
 
-    val database = Firebase.database
-    val dbReferenceUsuarios = database.getReference("usuarios")
+    private val db = FirebaseFirestore.getInstance()
+//    val database = Firebase.database
+//    val dbReferenceUsuarios = database.getReference("usuarios")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,10 @@ class ActivityCreateAccount : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.btnCrearCuenta.setOnClickListener {
+
             registrarUsuario()
+
+
         }
 
         binding.btnPoliticaPrivacidad.setOnClickListener {
@@ -143,16 +148,16 @@ class ActivityCreateAccount : AppCompatActivity() {
         }
 
 
-        var usuario = Usuario (
-            userId,
-            binding.etEmail.text.toString(),
-            rolUsuario,
-            binding.etNombre.text.toString(),
-            binding.etApellido.text.toString(),
-            binding.etNumTelefono.text.toString()
+        db.collection("users").document(userId).set(
+            hashMapOf(
+                "email" to etEmail.text.toString(),
+                "name" to etNombre.text.toString(),
+                "lastname" to etApellido.text.toString(),
+                "phone" to etNumTelefono.text.toString(),
+                "role" to rolUsuario
+                )
         )
 
-        dbReferenceUsuarios.child(usuario.id).setValue(usuario)
 
 
     }

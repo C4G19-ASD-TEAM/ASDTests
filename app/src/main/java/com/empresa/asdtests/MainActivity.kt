@@ -18,10 +18,19 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import com.google.firebase.firestore.QueryDocumentSnapshot
+
+import com.google.firebase.firestore.QuerySnapshot
+
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnCompleteListener
+import kotlinx.android.synthetic.main.activity_create_account.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,9 +41,13 @@ class MainActivity : AppCompatActivity() {
     //firebase auth
     private lateinit var auth: FirebaseAuth
 
-    //firebase database firestore
-    val database = Firebase.database
-    val dbReferenceUsuarios = database.getReference("usuarios")
+//    //firebase database
+//    val database = Firebase.database
+//    val dbReferenceUsuarios = database.getReference("usuarios")
+
+    //firestore
+    private val db = FirebaseFirestore.getInstance()
+
 
     //otras variables
     private lateinit var listaUsuarios: ArrayList<Usuario>
@@ -54,27 +67,25 @@ class MainActivity : AppCompatActivity() {
         Firebase.initialize(this)
         auth = Firebase.auth
 
-        listaUsuarios = ArrayList<Usuario>()
-
-
-
-
-
-        role = "User"
+        role = "Unknown"
 
         val currentUser = auth.currentUser
         if(currentUser != null){
 
-            //var role = roleUsuarioLogueado(currentUser?.uid.toString())
-            if(currentUser?.uid.toString().equals("JNnBxYGYNuWjrNy28iljdXJArdr2")) {
-                role = "Admin"
+            Log.e("FG", "El usuario con uId: " + currentUser?.uid.toString() + "tiene el role: " + role)
+
+            db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
+                role = (it.get("role") as String?).toString()
+                Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
             }
 
-            verActivityUsuarioLogueado(role);
+
+            verActivityUsuarioLogueado(role)
         }else{
 
 
             binding.btnSignIn.setOnClickListener {
+
 
                 if(binding.etUsername.text.toString().length < 1 ){
                     binding.etUsername.setError("Este campo no puede ser vácio")
@@ -85,6 +96,36 @@ class MainActivity : AppCompatActivity() {
 
                 if(validarCampo(binding.etUsername, "email")) {
                     login(binding.etUsername.text.toString(), binding.etPassword.text.toString())
+
+
+                    val docRef = db.collection("users").document(currentUser?.uid.toString())
+                    docRef.addSnapshotListener { snapshot, e ->
+                        if (e != null) {
+                            Log.e(TAG, "Listen failed.", e)
+                            return@addSnapshotListener
+                        }
+
+                        if (snapshot != null && snapshot.exists()) {
+                            Log.e(TAG, "Current data: ${snapshot.data}")
+
+                            role = (snapshot.get("role") as String?).toString()
+
+                            Log.e("FG", "Rol desde db: "+role)
+
+
+                        } else {
+                            Log.e(TAG, "Current data: null")
+                        }
+                    }
+
+
+
+//                    db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
+//                        Log.e("FG", "Ingreso a buscar en DB")
+//                        role = (it.get("role") as String?).toString()
+//                    }
+
+
                 }else{
                     binding.etUsername.setError("No has ingresado un correo válido")
                 }
@@ -96,6 +137,36 @@ class MainActivity : AppCompatActivity() {
             binding.btnCreateAccount.setOnClickListener {
 
                 verActivityCreateAccount()
+
+            }
+
+
+            binding.btnCargarRole.setOnClickListener{
+                val currentUser = auth.currentUser
+//                db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
+//                    role = (it.get("role") as String?).toString()
+//                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+//                }
+
+
+
+
+
+
+
+
+                //role = recuperaRol(etEmail.text.toString())
+
+
+                Log.e("FG", "el role obtenido desde el boton es: " + role)
+                binding.tvRole.text = role
+
+            }
+
+
+            binding.btnCargarActivity.setOnClickListener{
+
+                verActivityUsuarioLogueado(role);
 
             }
 
@@ -116,26 +187,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun login(email: String, password: String){
 
+        Log.e("FG", "entró a loguearse")
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("LOG TAG", "signInWithEmail:success")
                     val user = auth.currentUser
-                    //updateUI(user)
 
-                    Log.e("FB", "user ID: " + user?.uid.toString())
-
-
-                    //var role = roleUsuarioLogueado(user?.uid.toString())
-
-                    Log.e("FB", "usuario: "+role)
-
-
-                    if(user?.uid.toString().equals("JNnBxYGYNuWjrNy28iljdXJArdr2")) {
-                        role = "Admin"
+                    db.collection("users").document(user?.uid.toString()).get().addOnSuccessListener {
+                        role = (it.get("role") as String?).toString()
+                        Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
                     }
-                    verActivityUsuarioLogueado(role)
+
 
                 } else {
                     // If sign in fails, display a message to the user.
@@ -201,70 +265,51 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun roleUsuarioLogueado(uid: String):String {
-
-        val usuarioItemListener = object : ValueEventListener {
-            override fun onDataChange(datasnapshot: DataSnapshot) {
-
-                for (usr in datasnapshot.children){
-                    var usuario = Usuario( "", "", "", "", "", "")
-
-                    //objeto MAP
-                    val mapUsuario : Map<String, Any> = usr.value as HashMap<String, Any>
-
-                    usuario.id = mapUsuario.get("id").toString()
-                    usuario.nombre = mapUsuario.get("nombre").toString()
-                    usuario.apellido = mapUsuario.get("apellido").toString()
-                    usuario.numerotelefono = mapUsuario.get("numerotelefono").toString()
-                    usuario.email = mapUsuario.get("email").toString()
-                    usuario.role = mapUsuario.get("role").toString()
-
-                    //listaUsuarios.add(usuario)
 
 
-//                    if(uid.equals(usuario.id)){
-//                        role = usuario.role
-//                        Log.e("FB", "uid aca: "+usuario.id +" y el enviado es: "+uid +"y el role es:"+role )
-//                    }
-
-
-                }
-
-
-
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-        dbReferenceUsuarios.addValueEventListener(usuarioItemListener)
-
-
-        Log.e("FB", "en la funcion voy a retornar el role: "+role)
-        return role
-    }
-
-
-    private fun obtenerRol(usuarios: List<Usuario>, userId: String):String{
+    private fun obtenerRol(userId: String):String{
         var rol: String
         rol = "Unknown"
-        Log.e("FG", "Lista "+usuarios.size)
-        //Log.e("FG", "U0 "+usuarios[0].nombre)
 
-        for ( u in usuarios){
+        Log.e("FG", "el uid recibido es: "+userId)
 
-            Log.e("FG", "el uId es "+u.id)
-            if (userId==u.id){
-                rol = u.role
-            }
+        db.collection("users").document(userId).get().addOnSuccessListener {
+            Log.e("FG", "Ingreso a buscar en DB")
+            rol = (it.get("role") as String?).toString()
         }
+
         return rol
 
     }
+
+
+//    @Throws(InterruptedException::class)
+//    fun recuperaRol(correo: String?): String {
+//        val TAG = "MainActivity"
+//        val rol = arrayOf<String?>("")
+//        db.collection("users").get()
+//            .addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    for (document in task.result!!) {
+//                        Log.d(TAG, document.id + " => " + document.data)
+//                        if (document.data["email"] == correo) {
+//                            rol[0] = document.data["role"] as String
+//                            println("ROL encontrado" + rol[0])
+//                        }
+//                    }
+//                } else {
+//                    Log.w(TAG, "Error getting documents.", task.exception)
+//                }
+//            }
+//        //return rol[0]
+//
+//
+//
+//    }
+
+
+
+
 
 
 }
