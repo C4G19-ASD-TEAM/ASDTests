@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.empresa.asdtests.databinding.FragmentCreateAccountBinding
 import com.empresa.asdtests.databinding.FragmentEditarPreguntaBinding
 import com.empresa.asdtests.model.Pregunta
 import com.google.firebase.database.ktx.database
@@ -59,6 +58,14 @@ class FragmentEditarPregunta : Fragment() {
         }
 
 
+        binding.btnCancelar.setOnClickListener {
+            salir()
+        }
+
+
+        binding.btnEliminar.setOnClickListener {
+            eliminarPregunta(binding.edtId.text.toString())
+        }
 
 
         return binding.root
@@ -68,13 +75,19 @@ class FragmentEditarPregunta : Fragment() {
     }
 
 //funciones
-private fun eliminarPregunta(idPregunta: Int) {
+//private fun eliminarPregunta(idPregunta: Int) {
 //    CoroutineScope( Dispatchers.IO ).launch {
 //        val database = context?.let { ASDTestsDB.getDataBase(it) }
 //        val pelicula = Pregunta(idPregunta, "", "", "", "")
 //        database?.preguntaDAO()?.eliminar(pelicula)
 //    }
 //    salir()
+
+private fun eliminarPregunta(idPregunta: String) {
+
+    dbReferencePreguntas.child(idPregunta).removeValue()
+    salir()
+
 }
 
     private fun actualizarPregunta() {

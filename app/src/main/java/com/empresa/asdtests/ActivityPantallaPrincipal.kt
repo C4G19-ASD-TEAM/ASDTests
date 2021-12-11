@@ -3,6 +3,7 @@ package com.empresa.asdtests
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -32,6 +33,7 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
     val database = Firebase.database
     val dbReferencePreguntas = database.getReference("preguntas")
 
+    private lateinit var userId: String
 
     private lateinit var listaPreguntas: ArrayList<Pregunta>
     private lateinit var preguntaAdapter : ArrayAdapter<Pregunta>
@@ -54,7 +56,8 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
         Firebase.initialize(this)
         auth = Firebase.auth
-
+        val currentUser = auth.currentUser
+        userId = currentUser?.uid.toString()
 
         listaPreguntas = ArrayList<Pregunta>()
 
@@ -131,6 +134,11 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
     private fun verTest() {
 
         val intent = Intent(this, ActivityRealizarTest::class.java)
+
+        Log.e("FG", "El userId es: " + userId )
+
+        intent.putExtra("userId", userId)
+
         this.startActivity(intent)
 
     }
