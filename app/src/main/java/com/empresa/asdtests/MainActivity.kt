@@ -118,31 +118,31 @@ class MainActivity : AppCompatActivity() {
                     //login
                     login(binding.etUsername.text.toString(), binding.etPassword.text.toString())
 
-                    val docRef = db.collection("users").document(currentUser?.uid.toString())
-                    docRef.addSnapshotListener { snapshot, e ->
-                        if (e != null) {
-                            Log.e(TAG, "Listen failed.", e)
-                            return@addSnapshotListener
-                        }
-
-                        if (snapshot != null && snapshot.exists()) {
-                            Log.e(TAG, "Current data: ${snapshot.data}")
-
-                            role = (snapshot.get("role") as String?).toString()
-
-
-                        } else {
-                            Log.e(TAG, "Current data: null")
-                        }
-                    }
-
-                    CoroutineScope(Dispatchers.IO).launch{
-                        probarCorutina()
-                    }
-                    Log.e("FG", "Rol desde db: "+role)
+//                    val docRef = db.collection("users").document(currentUser?.uid.toString())
+//                    docRef.addSnapshotListener { snapshot, e ->
+//                        if (e != null) {
+//                            Log.e(TAG, "Listen failed.", e)
+//                            return@addSnapshotListener
+//                        }
+//
+//                        if (snapshot != null && snapshot.exists()) {
+//                            Log.e(TAG, "Current data: ${snapshot.data}")
+//
+//                            role = (snapshot.get("role") as String?).toString()
+//
+//
+//                        } else {
+//                            Log.e(TAG, "Current data: null")
+//                        }
+//                    }
+//
+//                    CoroutineScope(Dispatchers.IO).launch{
+//                        probarCorutina()
+//                    }
+//                    Log.e("FG", "Rol desde db: "+role)
 
                     //pasar a siguiente actividad con el rol
-                    verActivityUsuarioLogueado(role);
+                   // verActivityUsuarioLogueado(role);
 
 
                 }else{
@@ -162,14 +162,10 @@ class MainActivity : AppCompatActivity() {
 
             binding.btnCargarRole.setOnClickListener{
                 val currentUser = auth.currentUser
-//                db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
-//                    role = (it.get("role") as String?).toString()
-//                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
-//                }
-
-                //role = recuperaRol(etEmail.text.toString())
-
-
+                db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
+                    role = (it.get("role") as String?).toString()
+                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+                }
 
 
                 Log.e("FG", "el role obtenido desde el boton es: " + role)

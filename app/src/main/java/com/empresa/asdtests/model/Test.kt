@@ -5,5 +5,6 @@ data class Test(
     var testId: String,
     var userId: String,
     var preguntaId: String,
-    var respuesta: String
+    var preguntaTexto: String,
+    var respuesta: Int
 )

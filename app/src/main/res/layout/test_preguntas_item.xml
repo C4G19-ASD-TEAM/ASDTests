@@ -2,103 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_margin="10dp"
+
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+<LinearLayout
+    android:id="@+id/lyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"></ImageView>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Id"
-            android:visibility="gone"
-            ></TextView>
-
-        <TextView
-            android:id="@+id/tvArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Area"></TextView>
-
-
-        <TextView
-            android:id="@+id/tvPreText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descripcion"></TextView>
-
+        android:layout_margin="15dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></CheckBox>
-            <TextView
-                android:id="@+id/tvOpcion"
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Opcion"></TextView>
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher"></ImageView>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></CheckBox>
-
-        <TextView
-            android:id="@+id/tvRespuesta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Respuesta"></TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enviar"></Button>
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/tvTestUniqueId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Unique Id"
+                    android:visibility="visible"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tvTestId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="testId"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tvPreguntaId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="preguntaId"></TextView>
+
+                <TextView
+                    android:id="@+id/tvPreguntaTexto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="preguntaTexto"></TextView>
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
 
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 
+
+</LinearLayout>
 
 </LinearLayout>

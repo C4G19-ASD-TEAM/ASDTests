@@ -1,5 +1,6 @@
 package com.empresa.asdtests
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,11 +28,17 @@ class ActivityRealizarTest : AppCompatActivity() {
     private lateinit var binding : ActivityRealizarTestBinding
     private lateinit var listaPreguntas: ArrayList<Pregunta>
     private lateinit var listaPreguntasTest: ArrayList<Pregunta>
+    private lateinit var listaTest: ArrayList<Test>
     private lateinit var preguntaAdapter : ArrayAdapter<Pregunta>
+
+    private lateinit var testPreguntaAdapter : ArrayAdapter<Test>
+
+
     private lateinit var userId: String
 
     var cantidadPreguntasPorTest: Int = 5
 
+    val testId: String = UUID.randomUUID().toString()
 
 
     val database = Firebase.database
@@ -42,44 +49,82 @@ class ActivityRealizarTest : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_realizar_test)
-
         binding = ActivityRealizarTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         userId = intent.getStringExtra("userId").toString()
 
-        Log.e("FG", "User id recibido en el activity Realizar Test: " + userId)
-
         Firebase.initialize(this)
+
+        binding.tvTestUniqueId.text = testId
+
 
         listaPreguntas = ArrayList<Pregunta>()
 
         verListadoPreguntas()
 
         binding.lvPreguntasTest.setOnItemClickListener { parent, view, position, id ->
-            var pregunta = listaPreguntas[position]
+            var test = listaTest[position]
 
+            var pregunta = obtenerPregunta(test.preguntaId)
 
             val args = Bundle ()
-            args.putString("id", pregunta.id)
-            args.putString("area", pregunta.area)
-            args.putString("pretexto", pregunta.pretexto)
-            args.putString("opcion1", pregunta.opcion1)
-            args.putString("respuesta", pregunta.respuesta)
+            args.putString("testUniqueId", test.id)
+            args.putString("testId", test.testId)
+            args.putString("userId", test.userId)
+            args.putString("preguntaId", test.preguntaId)
+            args.putString("preguntaArea", pregunta.area)
+            args.putString("preguntaTexto", pregunta.pretexto)
+            args.putString("preguntaOpcion1", pregunta.opcion1)
+            args.putString("preguntaRespuesta", pregunta.respuesta)
 
 
-            Toast.makeText(this, "${pregunta}", Toast.LENGTH_SHORT ).show()
+
+            //Toast.makeText(this, "${test}", Toast.LENGTH_SHORT ).show()
 
             lvPreguntasTest.visibility = View.GONE
+            supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .replace( R.id.fragmentContainerResolverTest, FragmentResponderPregunta::class.java, args, "ResponderPreguntas" )
+                .commit()
 
 
         }
 
 
+        binding.btnVerResultadoTest.setOnClickListener {
+            val intent = Intent(this, ActivityVerResultado::class.java)
+            intent.putExtra("testId", testId)
+            intent.putExtra("userId", userId)
 
+            this.startActivity(intent)
+        }
+
+
+    }//fin oncreate
+
+    private fun obtenerPregunta(preguntaId: String): Pregunta {
+
+        Log.e("FG", "preguntaId: " + preguntaId)
+
+//        for (pregunta in listaPreguntas){
+//
+//        }
+
+        var pregunta: Pregunta? = listaPreguntas.find { it.id == preguntaId }
+        //assertEquals(theFirstBatman, "Michael Keaton")
+
+        if (pregunta != null) {
+            Log.e("FG", "OK preguntaId: "+preguntaId +" desde lista: " + pregunta.pretexto)
+        }else{
+            pregunta = Pregunta ("pregid1", "area1", "pretexto1", "opcion1-1", "respuesta1")
+            Log.e("FG", "preguntaId: " + pregunta.pretexto)
+        }
+
+        return pregunta
 
     }
+
 
     //funciones
 
@@ -98,28 +143,28 @@ class ActivityRealizarTest : AppCompatActivity() {
                     pregunta.pretexto = mapPregunta.get("pretexto").toString()
                     pregunta.opcion1 = mapPregunta.get("opcion1").toString()
                     pregunta.respuesta = mapPregunta.get("respuesta").toString()
-                    //agregamos a la lista
+                    //agregamos a la lista global de preguntas
                     listaPreguntas.add(pregunta)
 
                 }
 
 
-                listaPreguntasTest = generarTest ( listaPreguntas, userId )
+                listaTest = generarTest ( listaPreguntas, userId, testId )
 
 
+//                var pruebaListaTest: ArrayList<Test>
+//                pruebaListaTest = ArrayList()
+//
+//                var pruebaTest = Test ("id1", "testId1", "userId1", "preguntaId1","pre-texto1", "respuesta1")
+//                pruebaListaTest.add(pruebaTest)
+//                pruebaTest = Test ("id2", "testId2", "userId2", "preguntaId2","pre-texto2",  "respuesta2")
+//                pruebaListaTest.add(pruebaTest)
+//
+//                Log.e("FG", "listado test: "+pruebaListaTest)
 
 
-
-                Log.e("FG", "Lista de preguntas: " + listaPreguntasTest)
-
-
-                //linkear adapter
-                preguntaAdapter = TestPreguntasAdapter(this@ActivityRealizarTest, listaPreguntasTest)
-                binding.lvPreguntasTest.adapter = preguntaAdapter
-
-                //cojemos 5 items aleatorios de la lista de preguntas y llevamos a lista preguntas test
-
-
+                testPreguntaAdapter = TestPreguntasAdapter(this@ActivityRealizarTest, listaTest)
+                binding.lvPreguntasTest.adapter = testPreguntaAdapter
 
 
 
@@ -139,20 +184,14 @@ class ActivityRealizarTest : AppCompatActivity() {
 
 
 
-    fun generarTest(lista: ArrayList<Pregunta>, userId: String): ArrayList<Pregunta> {
+    fun generarTest(lista: ArrayList<Pregunta>, userId: String, testId: String): ArrayList<Test> {
 
         var listaPreguntasTests: ArrayList<Pregunta>
         listaPreguntasTests = ArrayList<Pregunta>()
 
+        var listaTest: ArrayList<Test>
+        listaTest = ArrayList<Test>()
 
-        val testId: String
-        testId = UUID.randomUUID().toString()
-
-
-//        val list = listOf("one", "two", "three", "four", "five")
-          val numberOfElements = 2
-//
-//        val randomElements = list.asSequence().shuffled().take(numberOfElements).toList()
 
         var i: Int = 0
         while (i < cantidadPreguntasPorTest ){
@@ -180,14 +219,17 @@ class ActivityRealizarTest : AppCompatActivity() {
                 testId,
                 userId,
                 preguntaTest.id,
-                "Campo pendiente para cuando el usuario responda"
+                preguntaTest.pretexto,
+                0
             )
 
             dbReferencePreguntasTest.child(test.id).setValue(test)
+            listaTest.add(test)
+
         }
 
 
-        return listaPreguntasTests
+        return listaTest
 
     }
 

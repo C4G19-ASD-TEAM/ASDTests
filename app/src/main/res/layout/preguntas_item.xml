@@ -6,60 +6,74 @@
     android:layout_margin="10dp"
     >
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="15dp">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"></ImageView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher"></ImageView>
 
-    <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
 
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Id"></TextView>
-
-        <TextView
-            android:id="@+id/tvArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Area"></TextView>
+                <TextView
+                    android:id="@+id/tvId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Id"
+                    android:visibility="gone"></TextView>
 
 
-        <TextView
-            android:id="@+id/tvPreText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descripcion"></TextView>
-
-        <TextView
-            android:id="@+id/tvOpcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Opcion"></TextView>
+                <TextView
+                    android:id="@+id/tvArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Area"></TextView>
 
 
-        <TextView
-            android:id="@+id/tvRespuesta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Respuesta"></TextView>
+                <TextView
+                    android:id="@+id/tvPreText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descripcion"></TextView>
+
+                <TextView
+                    android:id="@+id/tvOpcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opcion"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tvRespuesta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Respuesta"></TextView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 
 
-    </LinearLayout>
+
 
 </LinearLayout>

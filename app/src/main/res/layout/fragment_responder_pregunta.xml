@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".FragmentResponderPregunta"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edtTestUniqueId"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edtTestUniqueId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+
+        />
+
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edtPreguntaId"
+        ></TextView>
+
+        <EditText
+            android:id="@+id/edtPreguntaId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+
+            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edtTestId"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edtTestId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edtUserId"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edtUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+
+        />
+
+    <TextView
+            android:id="@+id/tvArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Area"
+            />
+
+        <TextView
+            android:id="@+id/tvPreguntaTexto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pregunta"
+
+            />
+    <EditText
+        android:id="@+id/edtTestPreguntaTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chk1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+        <TextView
+            android:id="@+id/tvOpcion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Respuesta Opción 1"
+
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+        <TextView
+            android:id="@+id/tvRespuesta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Respuesta Correcta"
+
+            />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar"></Button>
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"></Button>
+
+
+</LinearLayout>
