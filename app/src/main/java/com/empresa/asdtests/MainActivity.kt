@@ -31,6 +31,10 @@ import androidx.annotation.NonNull
 
 import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.android.synthetic.main.activity_create_account.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -69,6 +73,22 @@ class MainActivity : AppCompatActivity() {
 
         role = "Unknown"
 
+
+        binding.btnCorutina.setOnClickListener {
+
+            Log.e("FG", "Undió boton")
+            Toast.makeText(this, "Aca undió", Toast.LENGTH_SHORT).show()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                probarCorutina()
+            }
+
+        }
+
+
+
+
+
         val currentUser = auth.currentUser
         if(currentUser != null){
 
@@ -95,8 +115,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if(validarCampo(binding.etUsername, "email")) {
+                    //login
                     login(binding.etUsername.text.toString(), binding.etPassword.text.toString())
-
 
                     val docRef = db.collection("users").document(currentUser?.uid.toString())
                     docRef.addSnapshotListener { snapshot, e ->
@@ -110,20 +130,19 @@ class MainActivity : AppCompatActivity() {
 
                             role = (snapshot.get("role") as String?).toString()
 
-                            Log.e("FG", "Rol desde db: "+role)
-
 
                         } else {
                             Log.e(TAG, "Current data: null")
                         }
                     }
 
+                    CoroutineScope(Dispatchers.IO).launch{
+                        probarCorutina()
+                    }
+                    Log.e("FG", "Rol desde db: "+role)
 
-
-//                    db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
-//                        Log.e("FG", "Ingreso a buscar en DB")
-//                        role = (it.get("role") as String?).toString()
-//                    }
+                    //pasar a siguiente actividad con el rol
+                    verActivityUsuarioLogueado(role);
 
 
                 }else{
@@ -148,14 +167,9 @@ class MainActivity : AppCompatActivity() {
 //                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
 //                }
 
-
-
-
-
-
-
-
                 //role = recuperaRol(etEmail.text.toString())
+
+
 
 
                 Log.e("FG", "el role obtenido desde el boton es: " + role)
@@ -179,10 +193,45 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    suspend fun probarCorutina() {
+        return withContext(Dispatchers.IO){
 
+            for(i in 1 .. 10000 ){
+
+                println("probando: $i")
+
+            }
+
+
+        }
+
+
+
+
+    }
 
 
     //Otras funciones
+//
+//
+//    fun postItem(item: Item) {
+//        launch {
+//            val token = preparePost()
+//            val post = submitPost(token, item)
+//            processPost(post)
+//        }
+//    }
+//
+//    suspend fun preparePost(): Token {
+//        // makes a request and suspends the coroutine
+//        return suspendCoroutine { /* ... */ }
+//    }
+//
+//
+//
+
+
+
 
 
     private fun login(email: String, password: String){

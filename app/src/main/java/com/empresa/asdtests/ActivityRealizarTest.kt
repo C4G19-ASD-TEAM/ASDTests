@@ -30,6 +30,9 @@ class ActivityRealizarTest : AppCompatActivity() {
     private lateinit var preguntaAdapter : ArrayAdapter<Pregunta>
     private lateinit var userId: String
 
+    var cantidadPreguntasPorTest: Int = 5
+
+
 
     val database = Firebase.database
     val dbReferencePreguntas = database.getReference("preguntas")
@@ -141,13 +144,18 @@ class ActivityRealizarTest : AppCompatActivity() {
         var listaPreguntasTests: ArrayList<Pregunta>
         listaPreguntasTests = ArrayList<Pregunta>()
 
+
+        val testId: String
+        testId = UUID.randomUUID().toString()
+
+
 //        val list = listOf("one", "two", "three", "four", "five")
           val numberOfElements = 2
 //
 //        val randomElements = list.asSequence().shuffled().take(numberOfElements).toList()
 
         var i: Int = 0
-        while (i < 2 ){
+        while (i < cantidadPreguntasPorTest ){
 
             val randomIndex = Random.nextInt(lista.size)
             Log.e("FG", "valor random: " + lista[randomIndex].pretexto)
@@ -168,8 +176,8 @@ class ActivityRealizarTest : AppCompatActivity() {
 
         for(preguntaTest in listaPreguntasTests) {
             var test = Test (
-
                 UUID.randomUUID().toString(),
+                testId,
                 userId,
                 preguntaTest.id,
                 "Campo pendiente para cuando el usuario responda"

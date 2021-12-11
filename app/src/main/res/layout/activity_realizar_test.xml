@@ -11,9 +11,14 @@
         android:layout_height="wrap_content"
         android:text="TEST GENERADO, RESPONDA CADA UNA DE LAS PREGUNTAS"></TextView>
 
+
     <ListView
         android:id="@+id/lvPreguntasTest"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content">
+
+
+    </ListView>
+
 
 </LinearLayout>

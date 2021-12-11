@@ -21,7 +21,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+<!--    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -30,11 +30,7 @@
             android:text="Instrucciones:  ingrese usuario = user@asd.com o admin@asd.com y clave = Prueba123."
             ></TextView>
 
-
-
-
-
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 
@@ -91,13 +87,28 @@
             android:text="Create Account Using your E-Mail"
             ></Button>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
 
-        <TextView
+    <TextView
+        android:id="@+id/tvUserLogueado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario Logueado:"
+        ></TextView>
+
+
+    <TextView
             android:id="@+id/tvRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Traer Role"
             ></TextView>
+
+</LinearLayout>
 
         <Button
             android:id="@+id/btnCargarRole"
@@ -113,13 +124,19 @@
             android:text="Cargar siguiente Activity con el rol"></Button>
 
 
+        <Button
+            android:id="@+id/btnCorutina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="probar corutina"></Button>
 
-<!--
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerMain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
--->
+
+        <!--
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentContainerMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        -->
 
     </LinearLayout>
 

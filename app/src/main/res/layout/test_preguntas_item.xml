@@ -28,7 +28,9 @@
             android:id="@+id/tvId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Id"></TextView>
+            android:text="Id"
+            android:visibility="gone"
+            ></TextView>
 
         <TextView
             android:id="@+id/tvArea"
@@ -77,6 +79,22 @@
             android:text="Respuesta"></TextView>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar"></Button>
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
