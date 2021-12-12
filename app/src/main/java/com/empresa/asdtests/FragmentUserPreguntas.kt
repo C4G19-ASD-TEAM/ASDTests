@@ -47,6 +47,7 @@ class FragmentUserPreguntas : Fragment() {
                 binding.etArea.text.toString(),
                 binding.etPreText.text.toString(),
                 binding.etPreOpcion1.text.toString(),
+                binding.etPreOpcion2.text.toString(),
                 binding.etPreRespuesta.text.toString()
 
             )
@@ -61,7 +62,7 @@ class FragmentUserPreguntas : Fragment() {
 
                     dbReferencePreguntas.child(pregunta.id).setValue(pregunta)
 
-                    Toast.makeText(requireActivity(), "Pregunta agregada con éxito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "Pregunta agregada con éxito", Toast.LENGTH_LONG).show()
                     limpiarForm()
                     dialog.dismiss()
 
@@ -87,29 +88,32 @@ class FragmentUserPreguntas : Fragment() {
 
 
         binding.btnCancelarGuardarPregunta.setOnClickListener {
-            //salir()
+            salir()
         }
 
         return binding.root
 
     }
 
+
+
     private fun limpiarForm() {
         binding.etArea.setText("")
         binding.etPreText.setText("")
         binding.etPreRespuesta.setText("")
         binding.etPreOpcion1.setText("")
+        binding.etPreOpcion2.setText("")
 
     }
 
-//    private fun salir(){
-//        val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )
-//        lvPreguntas?.visibility = View.VISIBLE
-//
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.remove( this )
-//            ?.commit()
-//    }
+    private fun salir(){
+        val lvPreguntas = activity?.findViewById<ListView>( R.id.lvPreguntas )
+        lvPreguntas?.visibility = View.VISIBLE
+
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.remove( this )
+            ?.commit()
+    }
 
 
 }

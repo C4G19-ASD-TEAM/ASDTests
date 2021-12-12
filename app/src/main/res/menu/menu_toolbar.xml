@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
+
+    <item
+        android:id="@+id/mnVerResultados"
+        android:icon="@android:drawable/btn_star"
+        app:showAsAction="never"
+        android:title="@string/ver_resultados"
+        ></item>
+
+    <item
     android:id="@+id/mnCerrarSesion"
-    android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
+    android:icon="@android:drawable/ic_delete"
     app:showAsAction="never"
-    android:title="Cerrar Sesion"
+    android:title="@string/cerrar_sesion"
     ></item>
+
 
 
 </menu>

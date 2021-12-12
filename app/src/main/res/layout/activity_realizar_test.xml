@@ -6,22 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ActivityRealizarTest">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMyToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@android:color/primary_text_dark"
+        android:background="@color/primaryColor"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        ></androidx.appcompat.widget.Toolbar>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEST GENERADO, RESPONDA CADA UNA DE LAS PREGUNTAS"></TextView>
+        android:text="@string/run_test_instructions"></TextView>
+
 
     <Button
         android:id="@+id/btnVerResultadoTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver resultado"></Button>
-
+        android:text="@string/ver_resultados"></Button>
 
     <TextView
         android:id="@+id/tvTestUniqueId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         ></TextView>
 
 

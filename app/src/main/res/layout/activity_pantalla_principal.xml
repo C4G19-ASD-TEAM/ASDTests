@@ -12,6 +12,8 @@
     android:id="@+id/toolbarMyToolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    app:titleTextColor="@android:color/primary_text_dark"
+    android:background="@color/primaryColor"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -30,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Role de usuario: "></TextView>
+            android:text="@string/role_de_usuario"></TextView>
 
 
         <TextView
@@ -42,33 +44,62 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:src="@android:drawable/ic_menu_add"
+            android:id="@+id/btnAgregarPregunta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agregar_pregunta"
+            android:tooltipText="@string/agregar_pregunta"></ImageButton>
+
+        <ImageButton
+            android:src="@android:drawable/ic_media_play"
+            android:id="@+id/btnGenerarTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/generar_test"
+            android:tooltipText="@string/generar_test"></ImageButton>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lista_de_preguntas"
+            ></TextView>
+
+    </LinearLayout>
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="3"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     >
 
-    <Button
-        android:id="@+id/btnAgregarPregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Pregunta"></Button>
-
-    <Button
-        android:id="@+id/btnGenerarTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Generar Test"></Button>
 
 
 
 
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerrar Sesion"></Button>
+<!--    <Button-->
+<!--        android:id="@+id/btnCerrarSesion"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Cerrar Sesion"></Button>-->
 
 
     <androidx.fragment.app.FragmentContainerView

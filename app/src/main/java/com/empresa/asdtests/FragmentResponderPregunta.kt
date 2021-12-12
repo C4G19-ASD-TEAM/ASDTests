@@ -139,6 +139,7 @@ class FragmentResponderPregunta : Fragment() {
                 edtTestId.text.toString(),
                 edtUserId.text.toString(),
                 edtPreguntaId.text.toString(),
+                edtTestPreguntaArea.text.toString(),
                 edtTestPreguntaTexto.text.toString(),
                 respuestaCorrecta
                 )

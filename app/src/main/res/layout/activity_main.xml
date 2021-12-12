@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username:"></TextView>
+            android:text="@string/username"></TextView>
         <EditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:"></TextView>
+            android:text="@string/password"></TextView>
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             ></Button>
 
 
@@ -84,7 +84,7 @@
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Account Using your E-Mail"
+            android:text="@string/create_account_using_your_e_mail"
             ></Button>
 
 <LinearLayout
@@ -97,7 +97,7 @@
         android:id="@+id/tvUserLogueado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuario Logueado:"
+        android:text="@string/usuario_logueado"
         ></TextView>
 
 

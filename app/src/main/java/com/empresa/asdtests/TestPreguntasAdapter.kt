@@ -29,6 +29,7 @@ class TestPreguntasAdapter (private val mContext: Context, val listaTestPregunta
         layout.findViewById<TextView>(R.id.tvTestUniqueId).text = test.id
         layout.findViewById<TextView>(R.id.tvTestId).text = test.testId
         layout.findViewById<TextView>(R.id.tvPreguntaId).text = test.preguntaId
+        layout.findViewById<TextView>(R.id.tvPreguntaArea).text = test.preguntaArea
         layout.findViewById<TextView>(R.id.tvPreguntaTexto).text = test.preguntaTexto
 //        layout.findViewById<TextView>(R.id.tvOpcion).text = pregunta.opcion1
 //        layout.findViewById<TextView>(R.id.tvRespuesta).text = pregunta.respuesta
