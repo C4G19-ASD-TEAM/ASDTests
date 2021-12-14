@@ -16,42 +16,74 @@
         android:visibility="gone"
         />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/area"></TextView>
     <EditText
         android:id="@+id/edtArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Area"
+        android:hint="@string/area"
 
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pregunta"></TextView>
         <EditText
             android:id="@+id/edtPreguntaTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pregunta"
+            android:hint="@string/pregunta"
 
             />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/opcion_1"></TextView>
 
     <EditText
         android:id="@+id/edtOpcion1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Respuesta Opción 1"
+        android:hint="@string/opcion_1"
 
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/opcion_2"></TextView>
+    <EditText
+        android:id="@+id/edtOpcion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/opcion_2"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/respuesta"></TextView>
     <EditText
         android:id="@+id/edtRespuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Respuesta Correcta"
+        android:hint="@string/respuesta"
 
         />
 
-        <CheckBox
-            android:id="@+id/chkEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
 
         <ImageButton
             android:id="@+id/btnCancelar"
@@ -74,4 +106,5 @@
             android:src="@android:drawable/ic_menu_delete"
             />
 
+    </LinearLayout>
     </LinearLayout>

@@ -41,28 +41,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Unique Id"
-                    android:visibility="visible"></TextView>
+                    android:visibility="gone"></TextView>
 
 
                 <TextView
                     android:id="@+id/tvTestId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="testId"></TextView>
+                    android:text="testId"
+                    android:visibility="gone"
+                    ></TextView>
 
 
                 <TextView
                     android:id="@+id/tvPreguntaId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="preguntaId"></TextView>
+                    android:text="preguntaId"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/tvPreguntaArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="preguntaArea"></TextView>
 
                 <TextView
                     android:id="@+id/tvPreguntaTexto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="preguntaTexto"></TextView>
-
 
 
             </LinearLayout>

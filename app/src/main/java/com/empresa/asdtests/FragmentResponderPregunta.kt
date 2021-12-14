@@ -43,15 +43,6 @@ class FragmentResponderPregunta : Fragment() {
         //se inicializa (si estamos en una actividad el contexto es this
         Firebase.initialize(requireActivity())
 
-//        args.putString("testUniqueId", test.id)
-//        args.putString("testId", test.testId)
-//        args.putString("userId", test.userId)
-//        args.putString("preguntaId", test.preguntaId)
-//        args.putString("preguntaTexto", test.preguntaTexto)
-//
-//        args.putString("preguntaOpcion1", pregunta.opcion1)
-//        args.putString("preguntaRespuesta", pregunta.respuesta)
-
 
         val testUniqueId =  requireArguments().getString("testUniqueId")
         val testId =  requireArguments().getString("testId")
@@ -60,6 +51,7 @@ class FragmentResponderPregunta : Fragment() {
         val preguntaArea =  requireArguments().getString("preguntaArea")
         val preguntaTexto =  requireArguments().getString("preguntaTexto")
         val preguntaOpcion1 =  requireArguments().getString("preguntaOpcion1")
+        val preguntaOpcion2 =  requireArguments().getString("preguntaOpcion2")
         val preguntaRespuesta =  requireArguments().getString("preguntaRespuesta")
 
 
@@ -71,6 +63,7 @@ class FragmentResponderPregunta : Fragment() {
         binding.tvArea.setText(preguntaArea)
         binding.edtTestPreguntaTexto.setText(preguntaTexto)
         binding.tvOpcion1.setText(preguntaOpcion1)
+        binding.tvOpcion2.setText(preguntaOpcion2)
         binding.tvRespuesta.setText(preguntaRespuesta)
 
 
@@ -83,20 +76,37 @@ class FragmentResponderPregunta : Fragment() {
         binding.chk1.setOnClickListener {
             if(chk1.isChecked) {
                 chk2.setEnabled(false)
+                chk3.setEnabled(false)
             }else
             {
                 chk2.setEnabled(true)
+                chk3.setEnabled(true)
             }
         }
 
         binding.chk2.setOnClickListener {
             if(chk2.isChecked) {
                 chk1.setEnabled(false)
+                chk3.setEnabled(false)
             }else
             {
                 chk1.setEnabled(true)
+                chk3.setEnabled(true)
             }
         }
+
+
+        binding.chk3.setOnClickListener {
+            if(chk3.isChecked) {
+                chk1.setEnabled(false)
+                chk2.setEnabled(false)
+            }else
+            {
+                chk1.setEnabled(true)
+                chk2.setEnabled(true)
+            }
+        }
+
 
 
         binding.btnCancelar.setOnClickListener {
@@ -113,11 +123,12 @@ class FragmentResponderPregunta : Fragment() {
         private fun responderPregunta() {
 
             var respuestaCorrecta = 0
-            if((chk1.isChecked and chk2.isChecked) or (!chk1.isChecked and !chk2.isChecked)){
+            if((!chk1.isChecked and !chk2.isChecked and !chk3.isChecked)){
 
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error. Selecciona una respuesta", Toast.LENGTH_SHORT).show()
                 chk1.setError("Error debes escoger una y solo una respuesta")
                 chk2.setError("Error debes escoger una y solo una respuesta")
+                chk3.setError("Error debes escoger una y solo una respuesta")
 
             }else {
 
@@ -132,13 +143,13 @@ class FragmentResponderPregunta : Fragment() {
                 //salir()
                 }
 
-
                 //actualizar test
                 var test = Test(
                 edtTestUniqueId.text.toString(),
                 edtTestId.text.toString(),
                 edtUserId.text.toString(),
                 edtPreguntaId.text.toString(),
+                edtTestPreguntaArea.text.toString(),
                 edtTestPreguntaTexto.text.toString(),
                 respuestaCorrecta
                 )
@@ -147,7 +158,6 @@ class FragmentResponderPregunta : Fragment() {
 
                 Log.e("FG", "actualizar test " + test)
                 salir()
-
 
             }
 

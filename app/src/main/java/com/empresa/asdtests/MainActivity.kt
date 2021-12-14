@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.empresa.asdtests.databinding.ActivityMainBinding
@@ -74,16 +75,23 @@ class MainActivity : AppCompatActivity() {
         role = "Unknown"
 
 
-        binding.btnCorutina.setOnClickListener {
+        binding.progressBarMainActivity.visibility = View.GONE
 
-            Log.e("FG", "Undió boton")
-            Toast.makeText(this, "Aca undió", Toast.LENGTH_SHORT).show()
 
-            CoroutineScope(Dispatchers.IO).launch{
-                probarCorutina()
-            }
 
-        }
+
+
+
+//        binding.btnCorutina.setOnClickListener {
+//
+//            Log.e("FG", "Undió boton")
+//            Toast.makeText(this, "Aca undió", Toast.LENGTH_SHORT).show()
+//
+//            CoroutineScope(Dispatchers.IO).launch{
+//                probarCorutina()
+//            }
+//
+//        }
 
 
 
@@ -97,10 +105,11 @@ class MainActivity : AppCompatActivity() {
             db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
                 role = (it.get("role") as String?).toString()
                 Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+                verActivityUsuarioLogueado(role)
             }
 
 
-            verActivityUsuarioLogueado(role)
+
         }else{
 
 
@@ -115,8 +124,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if(validarCampo(binding.etUsername, "email")) {
+
+                    binding.progressBarMainActivity.visibility = View.VISIBLE
+
                     //login
                     login(binding.etUsername.text.toString(), binding.etPassword.text.toString())
+
+
 
 //                    val docRef = db.collection("users").document(currentUser?.uid.toString())
 //                    docRef.addSnapshotListener { snapshot, e ->
@@ -141,8 +155,7 @@ class MainActivity : AppCompatActivity() {
 //                    }
 //                    Log.e("FG", "Rol desde db: "+role)
 
-                    //pasar a siguiente actividad con el rol
-                   // verActivityUsuarioLogueado(role);
+
 
 
                 }else{
@@ -153,6 +166,10 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+
+
+
+
             binding.btnCreateAccount.setOnClickListener {
 
                 verActivityCreateAccount()
@@ -160,25 +177,25 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            binding.btnCargarRole.setOnClickListener{
-                val currentUser = auth.currentUser
-                db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
-                    role = (it.get("role") as String?).toString()
-                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
-                }
+//            binding.btnCargarRole.setOnClickListener{
+//                val currentUser = auth.currentUser
+//                db.collection("users").document(currentUser?.uid.toString()).get().addOnSuccessListener {
+//                    role = (it.get("role") as String?).toString()
+//                    Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+//                }
+//
+//
+//                Log.e("FG", "el role obtenido desde el boton es: " + role)
+//                binding.tvRole.text = role
+//
+//            }
 
 
-                Log.e("FG", "el role obtenido desde el boton es: " + role)
-                binding.tvRole.text = role
-
-            }
-
-
-            binding.btnCargarActivity.setOnClickListener{
-
-                verActivityUsuarioLogueado(role);
-
-            }
+//            binding.btnCargarActivity.setOnClickListener{
+//
+//                verActivityUsuarioLogueado(role);
+//
+//            }
 
 
 
@@ -189,22 +206,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    suspend fun probarCorutina() {
-        return withContext(Dispatchers.IO){
-
-            for(i in 1 .. 10000 ){
-
-                println("probando: $i")
-
-            }
-
-
-        }
-
-
-
-
-    }
+//    suspend fun probarCorutina() {
+//        return withContext(Dispatchers.IO){
+//
+//            for(i in 1 .. 10000 ){
+//
+//                println("probando: $i")
+//
+//            }
+//
+//
+//        }
+//
+//
+//
+//
+//    }
 
 
     //Otras funciones
@@ -243,10 +260,15 @@ class MainActivity : AppCompatActivity() {
                     db.collection("users").document(user?.uid.toString()).get().addOnSuccessListener {
                         role = (it.get("role") as String?).toString()
                         Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+                        verActivityUsuarioLogueado(role);
                     }
 
 
+
+
+
                 } else {
+                    binding.progressBarMainActivity.visibility = View.GONE
                     // If sign in fails, display a message to the user.
                     Log.w("LOG TAG", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -265,10 +287,13 @@ class MainActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if(currentUser != null){
             //var role = roleUsuarioLogueado(currentUser?.uid.toString())
-            if(currentUser?.uid.toString().equals("JNnBxYGYNuWjrNy28iljdXJArdr2")) {
-                role = "Admin"
-            }
-            verActivityUsuarioLogueado(role);
+
+//            db.collection("users").document(user?.uid.toString()).get().addOnSuccessListener {
+//                role = (it.get("role") as String?).toString()
+//                Log.e("FG", "Ingreso a buscar en DB funcion login.  Role: " + role)
+//                verActivityUsuarioLogueado(role);
+//            }
+
         }
     }
 
@@ -280,6 +305,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityPantallaPrincipal::class.java)
         intent.putExtra("role", role)
         this.startActivity(intent)
+        finish()
     }
 
     private fun verActivityCreateAccount(){
@@ -312,47 +338,20 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun obtenerRol(userId: String):String{
-        var rol: String
-        rol = "Unknown"
-
-        Log.e("FG", "el uid recibido es: "+userId)
-
-        db.collection("users").document(userId).get().addOnSuccessListener {
-            Log.e("FG", "Ingreso a buscar en DB")
-            rol = (it.get("role") as String?).toString()
-        }
-
-        return rol
-
-    }
-
-
-//    @Throws(InterruptedException::class)
-//    fun recuperaRol(correo: String?): String {
-//        val TAG = "MainActivity"
-//        val rol = arrayOf<String?>("")
-//        db.collection("users").get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    for (document in task.result!!) {
-//                        Log.d(TAG, document.id + " => " + document.data)
-//                        if (document.data["email"] == correo) {
-//                            rol[0] = document.data["role"] as String
-//                            println("ROL encontrado" + rol[0])
-//                        }
-//                    }
-//                } else {
-//                    Log.w(TAG, "Error getting documents.", task.exception)
-//                }
-//            }
-//        //return rol[0]
+//    private fun obtenerRol(userId: String):String{
+//        var rol: String
+//        rol = "Unknown"
 //
+//        Log.e("FG", "el uid recibido es: "+userId)
 //
+//        db.collection("users").document(userId).get().addOnSuccessListener {
+//            Log.e("FG", "Ingreso a buscar en DB")
+//            rol = (it.get("role") as String?).toString()
+//        }
+//
+//        return rol
 //
 //    }
-
-
 
 
 

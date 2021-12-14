@@ -43,12 +43,14 @@ class FragmentEditarPregunta : Fragment() {
         val area =  requireArguments().getString("area")
         val pretexto =  requireArguments().getString("pretexto")
         val opcion1 =  requireArguments().getString("opcion1")
+        val opcion2 =  requireArguments().getString("opcion2")
         val respuesta =  requireArguments().getString("respuesta")
 
         binding.edtId.setText(id)
         binding.edtArea.setText(area)
         binding.edtPreguntaTexto.setText(pretexto)
         binding.edtOpcion1.setText(opcion1)
+        binding.edtOpcion2.setText(opcion2)
         binding.edtRespuesta.setText(respuesta)
 
 
@@ -97,6 +99,7 @@ private fun eliminarPregunta(idPregunta: String) {
             edtArea.text.toString(),
             edtPreguntaTexto.text.toString(),
             edtOpcion1.text.toString(),
+            edtOpcion2.text.toString(),
             edtRespuesta.text.toString())
 
         dbReferencePreguntas.child(pregunta.id).setValue(pregunta)

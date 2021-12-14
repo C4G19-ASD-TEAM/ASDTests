@@ -22,8 +22,8 @@ class PreguntasAdapter (private val mContext: Context, val listaPreguntas: List<
         layout.findViewById<TextView>(R.id.tvId).text = pregunta.id
         layout.findViewById<TextView>(R.id.tvArea).text = pregunta.area
         layout.findViewById<TextView>(R.id.tvPreText).text = pregunta.pretexto
-        layout.findViewById<TextView>(R.id.tvOpcion).text = pregunta.opcion1
-        layout.findViewById<TextView>(R.id.tvRespuesta).text = pregunta.respuesta
+//        layout.findViewById<TextView>(R.id.tvOpcion).text = pregunta.opcion1
+//        layout.findViewById<TextView>(R.id.tvRespuesta).text = pregunta.respuesta
 
 
         return layout

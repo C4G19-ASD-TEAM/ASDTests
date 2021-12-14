@@ -48,33 +48,33 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username:"></TextView>
+            android:text="@string/username"></TextView>
         <EditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             android:inputType="textEmailAddress"
-            android:text="admin@asd.com"
+
             ></EditText>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:"></TextView>
+            android:text="@string/password"></TextView>
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
-            android:text="Prueba123."
+
             ></EditText>
 
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             ></Button>
 
 
@@ -84,7 +84,7 @@
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Account Using your E-Mail"
+            android:text="@string/create_account_using_your_e_mail"
             ></Button>
 
 <LinearLayout
@@ -93,42 +93,41 @@
     android:orientation="horizontal"
     >
 
-    <TextView
-        android:id="@+id/tvUserLogueado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Usuario Logueado:"
-        ></TextView>
+<!--    <TextView-->
+<!--        android:id="@+id/tvUserLogueado"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/usuario_logueado"-->
+<!--        ></TextView>-->
 
 
     <TextView
             android:id="@+id/tvRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Traer Role"
             ></TextView>
 
 </LinearLayout>
 
-        <Button
-            android:id="@+id/btnCargarRole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cargar rol"></Button>
+<!--        <Button-->
+<!--            android:id="@+id/btnCargarRole"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Cargar rol"></Button>-->
 
 
-        <Button
-            android:id="@+id/btnCargarActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cargar siguiente Activity con el rol"></Button>
+<!--        <Button-->
+<!--            android:id="@+id/btnCargarActivity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Cargar siguiente Activity con el rol"></Button>-->
 
 
-        <Button
-            android:id="@+id/btnCorutina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="probar corutina"></Button>
+<!--        <Button-->
+<!--            android:id="@+id/btnCorutina"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="probar corutina"></Button>-->
 
 
         <!--
@@ -140,5 +139,12 @@
 
     </LinearLayout>
 
+
+
+    <ProgressBar
+        android:id="@+id/progressBarMainActivity"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

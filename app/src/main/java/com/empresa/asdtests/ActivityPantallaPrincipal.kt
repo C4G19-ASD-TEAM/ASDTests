@@ -47,11 +47,13 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //soportar la barra de menu toolbar
-        setSupportActionBar(toolbarMyToolbar)
 
         binding = ActivityPantallaPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        //soportar la barra de menu toolbar
+        setSupportActionBar(binding.toolbarMyToolbar)
 
 
         Firebase.initialize(this)
@@ -92,10 +94,11 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
             args.putString("area", pregunta.area)
             args.putString("pretexto", pregunta.pretexto)
             args.putString("opcion1", pregunta.opcion1)
+            args.putString("opcion2", pregunta.opcion2)
             args.putString("respuesta", pregunta.respuesta)
 
 
-            Toast.makeText(this, "${pregunta}", Toast.LENGTH_SHORT ).show()
+            //Toast.makeText(this, "${pregunta}", Toast.LENGTH_SHORT ).show()
 
             lvPreguntas.visibility = View.GONE
             supportFragmentManager.beginTransaction()
@@ -121,14 +124,6 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
 
 
 
-
-        btnCerrarSesion.setOnClickListener {
-
-            cerrarSesion()
-
-        }
-
-
     }
 
     private fun verTest() {
@@ -144,11 +139,17 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
     }
 
     private fun verListadoPreguntas() {
+
+
+
         val preguntaItemListener = object : ValueEventListener{
             override fun onDataChange(datasnapshot: DataSnapshot) {
 
+                //limpiar lista para que no muestre una lista anterior despues de agregar o actualizar data
+                listaPreguntas = ArrayList<Pregunta>()
+
                 for (preg in datasnapshot.children){
-                    var pregunta = Pregunta( "", "", "", "", "")
+                    var pregunta = Pregunta( "", "", "", "", "","")
 
                     //objeto MAP
                     val mapPregunta : Map<String, Any> = preg.value as HashMap<String, Any>
@@ -157,6 +158,7 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
                     pregunta.area = mapPregunta.get("area").toString()
                     pregunta.pretexto = mapPregunta.get("pretexto").toString()
                     pregunta.opcion1 = mapPregunta.get("opcion1").toString()
+                    pregunta.opcion2 = mapPregunta.get("opcion2").toString()
                     pregunta.respuesta = mapPregunta.get("respuesta").toString()
 
 
@@ -195,20 +197,36 @@ class ActivityPantallaPrincipal : AppCompatActivity() {
             cerrarSesion()
             true
         }
+
+        R.id.mnVerResultados -> {
+            verResultados()
+            true
+        }
+
         else -> {
             super.onOptionsItemSelected(item)
         }
 
     }
 
+    private fun verResultados() {
+        val intent = Intent(this, ActivityVerResultado::class.java)
+        this.startActivity(intent)
+    }
+
     fun cerrarSesion(){
         auth.signOut()
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
+        finish()
     }
 
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        moveTaskToBack(true);
 
+    }
 
 
 }

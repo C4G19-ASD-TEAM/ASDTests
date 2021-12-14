@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.empresa.asdtests.databinding.ActivityRealizarTestBinding
 import com.empresa.asdtests.model.Pregunta
 import com.empresa.asdtests.model.Test
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -25,6 +28,12 @@ import kotlin.random.Random
 
 class ActivityRealizarTest : AppCompatActivity() {
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding : ActivityRealizarTestBinding
     private lateinit var listaPreguntas: ArrayList<Pregunta>
     private lateinit var listaPreguntasTest: ArrayList<Pregunta>
@@ -59,6 +68,11 @@ class ActivityRealizarTest : AppCompatActivity() {
         binding.tvTestUniqueId.text = testId
 
 
+        //soportar la barra de menu toolbar
+        setSupportActionBar(binding.toolbarMyToolbar)
+
+
+
         listaPreguntas = ArrayList<Pregunta>()
 
         verListadoPreguntas()
@@ -76,6 +90,7 @@ class ActivityRealizarTest : AppCompatActivity() {
             args.putString("preguntaArea", pregunta.area)
             args.putString("preguntaTexto", pregunta.pretexto)
             args.putString("preguntaOpcion1", pregunta.opcion1)
+            args.putString("preguntaOpcion2", pregunta.opcion2)
             args.putString("preguntaRespuesta", pregunta.respuesta)
 
 
@@ -117,7 +132,7 @@ class ActivityRealizarTest : AppCompatActivity() {
         if (pregunta != null) {
             Log.e("FG", "OK preguntaId: "+preguntaId +" desde lista: " + pregunta.pretexto)
         }else{
-            pregunta = Pregunta ("pregid1", "area1", "pretexto1", "opcion1-1", "respuesta1")
+            pregunta = Pregunta ("pregid1", "area1", "pretexto1", "opcion1-1", "opcion2 ", "respuesta1")
             Log.e("FG", "preguntaId: " + pregunta.pretexto)
         }
 
@@ -133,7 +148,7 @@ class ActivityRealizarTest : AppCompatActivity() {
             override fun onDataChange(datasnapshot: DataSnapshot) {
 
                 for (preg in datasnapshot.children){
-                    var pregunta = Pregunta( "", "", "", "", "")
+                    var pregunta = Pregunta( "", "", "", "", "", "")
 
                     //objeto MAP
                     val mapPregunta : Map<String, Any> = preg.value as HashMap<String, Any>
@@ -142,11 +157,13 @@ class ActivityRealizarTest : AppCompatActivity() {
                     pregunta.area = mapPregunta.get("area").toString()
                     pregunta.pretexto = mapPregunta.get("pretexto").toString()
                     pregunta.opcion1 = mapPregunta.get("opcion1").toString()
+                    pregunta.opcion2 = mapPregunta.get("opcion2").toString()
                     pregunta.respuesta = mapPregunta.get("respuesta").toString()
                     //agregamos a la lista global de preguntas
                     listaPreguntas.add(pregunta)
 
                 }
+
 
 
                 listaTest = generarTest ( listaPreguntas, userId, testId )
@@ -219,6 +236,7 @@ class ActivityRealizarTest : AppCompatActivity() {
                 testId,
                 userId,
                 preguntaTest.id,
+                preguntaTest.area,
                 preguntaTest.pretexto,
                 0
             )
@@ -232,6 +250,39 @@ class ActivityRealizarTest : AppCompatActivity() {
         return listaTest
 
     }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.mnCerrarSesion -> {
+            Toast.makeText(this, "Cerrar", Toast.LENGTH_SHORT).show()
+            cerrarSesion()
+            true
+        }
+
+        R.id.mnVerResultados -> {
+            verResultados()
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun verResultados() {
+        val intent = Intent(this, ActivityVerResultado::class.java)
+        this.startActivity(intent)
+    }
+
+    fun cerrarSesion(){
+        auth.signOut()
+        val intent = Intent(this, MainActivity::class.java)
+        this.startActivity(intent)
+    }
+
+
 
 
 

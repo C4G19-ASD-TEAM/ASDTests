@@ -5,6 +5,7 @@ data class Pregunta(
     var area: String,
     var pretexto: String,
     var opcion1: String,
+    var opcion2: String,
     var respuesta: String
 
 )

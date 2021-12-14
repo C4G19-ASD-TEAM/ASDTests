@@ -8,45 +8,72 @@
     android:layout_margin="20dp">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/area"></TextView>
     <EditText
         android:id="@+id/etArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Area de la pregunta"
+        android:hint="@string/area"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pregunta"></TextView>
 
     <EditText
         android:id="@+id/etPreText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Texto de la pregunta"
+        android:hint="@string/pregunta"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/opcion_1"></TextView>
 
     <EditText
         android:id="@+id/etPreOpcion1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Opción de pregunta"
+        android:hint="@string/opcion_1"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/opcion_2"></TextView>
+
+    <EditText
+        android:id="@+id/etPreOpcion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/opcion_2"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/respuesta"></TextView>
     <EditText
         android:id="@+id/etPreRespuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Respuesta correcta"
+        android:hint="@string/respuesta"
         />
 
     <Button
         android:id="@+id/btnGuardarPregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar"/>
+        android:text="@string/guardar"/>
 
     <Button
         android:id="@+id/btnCancelarGuardarPregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar"/>
+        android:text="@string/cancelar"/>
 
 
 

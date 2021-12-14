@@ -36,32 +36,40 @@
                     android:text="Id"
                     android:visibility="gone"></TextView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/area"></TextView>
 
                 <TextView
                     android:id="@+id/tvArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Area"></TextView>
+                    android:text="@string/area"></TextView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pregunta"></TextView>
 
                 <TextView
                     android:id="@+id/tvPreText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Descripcion"></TextView>
+                    android:text="@string/pregunta"></TextView>
 
-                <TextView
-                    android:id="@+id/tvOpcion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Opcion"></TextView>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvOpcion"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Opcion"></TextView>-->
 
 
-                <TextView
-                    android:id="@+id/tvRespuesta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Respuesta"></TextView>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvRespuesta"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Respuesta"></TextView>-->
 
 
             </LinearLayout>
