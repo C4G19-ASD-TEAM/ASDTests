@@ -90,6 +90,7 @@ class ActivityRealizarTest : AppCompatActivity() {
             args.putString("preguntaArea", pregunta.area)
             args.putString("preguntaTexto", pregunta.pretexto)
             args.putString("preguntaOpcion1", pregunta.opcion1)
+            args.putString("preguntaOpcion2", pregunta.opcion2)
             args.putString("preguntaRespuesta", pregunta.respuesta)
 
 

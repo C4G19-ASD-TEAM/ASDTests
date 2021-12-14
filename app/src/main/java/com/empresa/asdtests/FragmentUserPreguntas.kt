@@ -63,6 +63,8 @@ class FragmentUserPreguntas : Fragment() {
                     dbReferencePreguntas.child(pregunta.id).setValue(pregunta)
 
                     Toast.makeText(requireActivity(), "Pregunta agregada con éxito", Toast.LENGTH_LONG).show()
+
+
                     limpiarForm()
                     dialog.dismiss()
 
