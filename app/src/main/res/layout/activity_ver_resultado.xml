@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityVerResultado"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMyToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@android:color/primary_text_dark"
+        android:background="@color/primaryColor"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        ></androidx.appcompat.widget.Toolbar>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/tvIdTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id de test actual: "
+            android:visibility="gone"></TextView>
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id de usuario: "
+            android:visibility="gone"></TextView>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resultado_de_test_actual"></TextView>
+
+
+
+        <EditText
+            android:id="@+id/edtResultadoActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/resultado"></EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_de_test_realizados"></TextView>
+
+        <EditText
+            android:id="@+id/edtCantidadTestsRealizados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/resultado"></EditText>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_de_preguntas"></TextView>
+
+        <EditText
+            android:id="@+id/edtCantidadTotalPreguntas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/resultado"></EditText>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_de_preguntas_correctas"></TextView>
+
+        <EditText
+            android:id="@+id/edtCantidadTotalPreguntasCorrectas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/resultado"></EditText>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resultado_acumulado"></TextView>
+
+        <EditText
+            android:id="@+id/edtResultadoAcumulado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/resultado"></EditText>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

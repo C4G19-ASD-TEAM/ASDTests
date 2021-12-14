@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mnVerResultados"
+        android:icon="@android:drawable/btn_star"
+        app:showAsAction="never"
+        android:title="@string/ver_resultados"
+        ></item>
+
+    <item
+    android:id="@+id/mnCerrarSesion"
+    android:icon="@android:drawable/ic_delete"
+    app:showAsAction="never"
+    android:title="@string/cerrar_sesion"
+    ></item>
+
+
+
+</menu>

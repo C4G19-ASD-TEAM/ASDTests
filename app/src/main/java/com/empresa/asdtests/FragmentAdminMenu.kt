@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -14,10 +13,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FragmentPoliticaPrivacidad.newInstance] factory method to
+ * Use the [FragmentAdminMenu.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentPoliticaPrivacidad : Fragment() {
+class FragmentAdminMenu : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,21 +34,9 @@ class FragmentPoliticaPrivacidad : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        val fragmento = inflater.inflate(R.layout.fragment_politica_privacidad, container, false)
-        val btnRegresarPolitica = fragmento.findViewById<Button>(R.id.btnRegresarPolitica)
-
-        btnRegresarPolitica.setOnClickListener {
-//            activity?.getSupportFragmentManager()?.beginTransaction()
-//                ?.setReorderingAllowed(true)
-//                ?.replace(R.id.fragmentContainerMain, FragmentCreateAccountDetail::class.java, null, "CreateAccount")
-//                ?.remove(this)
-//                ?.commit()
-        }
-
-
+        //cambio de variable y retornar variable
+        val fragmento = inflater.inflate(R.layout.fragment_admin_menu, container, false)
         return fragmento
-
 
     }
 
@@ -60,12 +47,12 @@ class FragmentPoliticaPrivacidad : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentPoliticaPrivacidad.
+         * @return A new instance of fragment FragmentAdminMenu.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FragmentPoliticaPrivacidad().apply {
+            FragmentAdminMenu().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

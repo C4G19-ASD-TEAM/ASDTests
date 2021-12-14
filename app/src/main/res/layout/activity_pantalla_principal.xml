@@ -8,21 +8,20 @@
     android:orientation="vertical">
 
 
-
-
-
-<LinearLayout
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarMyToolbar"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
+    android:layout_height="?attr/actionBarSize"
+    app:titleTextColor="@android:color/primary_text_dark"
+    android:background="@color/primaryColor"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    ></androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/cover"
-        ></ImageView>
 
-</LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,14 +32,53 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User: "></TextView>
+            android:text="@string/role_de_usuario"></TextView>
 
 
         <TextView
             android:id="@+id/tvUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"></TextView>
+            ></TextView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:src="@android:drawable/ic_menu_add"
+            android:id="@+id/btnAgregarPregunta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agregar_pregunta"
+            android:tooltipText="@string/agregar_pregunta"></ImageButton>
+
+        <ImageButton
+            android:src="@android:drawable/ic_media_play"
+            android:id="@+id/btnGenerarTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/generar_test"
+            android:tooltipText="@string/generar_test"></ImageButton>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lista_de_preguntas"
+            ></TextView>
 
     </LinearLayout>
 
@@ -49,20 +87,46 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="3"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
     >
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerCategorias"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                >
-
-            </androidx.recyclerview.widget.RecyclerView>
 
 
+
+<!--    <Button-->
+<!--        android:id="@+id/btnCerrarSesion"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Cerrar Sesion"></Button>-->
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerPantallaPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        ></androidx.fragment.app.FragmentContainerView>
+
+    <ListView
+        android:id="@+id/lvPreguntas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
+
+
+    <!--
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    -->
 
 </LinearLayout>
 

@@ -12,31 +12,19 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import com.empresa.asdtests.model.Usuario
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentCreateAccountDetail.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentCreateAccountDetail : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -45,6 +33,7 @@ class FragmentCreateAccountDetail : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val fragmento =  inflater.inflate(R.layout.fragment_create_account_detail, container, false)
+
         val btnCrearCuenta = fragmento.findViewById<Button>(R.id.btnCrearCuenta)
         val btnRegresar = fragmento.findViewById<Button>(R.id.btnRegresar)
         val btnPoliticaPrivacidad = fragmento.findViewById<Button>(R.id.btnPoliticaPrivacidad)
@@ -56,6 +45,7 @@ class FragmentCreateAccountDetail : Fragment() {
             val edtNumTelefono = fragmento.findViewById<EditText>(R.id.etNumTelefono)
             val edtClave = fragmento.findViewById<EditText>(R.id.etClave)
             val cbAceptaTerminos = fragmento.findViewById<CheckBox>(R.id.cbAceptaTerminos)
+            val cbIsAdmin = fragmento.findViewById<CheckBox>(R.id.cbIsAdmin)
 
             var flagValidform: Boolean = false
 
@@ -91,69 +81,49 @@ class FragmentCreateAccountDetail : Fragment() {
             }
 
             if(flagValidform){
-                Toast.makeText(activity, "TODO OK", Toast.LENGTH_LONG).show()
+                //todo bien (form validado)
 
+                Toast.makeText(activity, "TODO OK... Insertando usuario en la base de datos", Toast.LENGTH_LONG).show()
 
-                //mostrar el segundofragmento
-                activity?.getSupportFragmentManager()?.beginTransaction()
-                    ?.setReorderingAllowed(true)
-                    ?.replace(
-                        R.id.fragmentContainerMain,
-                        FragmentNewAccountCreated::class.java,
-                        null,
-                        "Cuenta creada"
-                    )
-                    ?.addToBackStack("")
-                    ?.commit()
+                //insertar en la BD
+                val context = activity?.applicationContext
 
+                //Instanciamos un objeto pelicula par Guardar en la BD
+                //val usuario =  Usuario( 0, "${edtTitulo.text}", edtDuracion.text.toString().toInt(), "${edtProtagonista.text}")
+
+                var role: String
+                if(cbIsAdmin.isChecked){
+                    role = "Admin"
+                }else{
+                    role = "User"
+                }
 
             }
-
-
-
-
-        /*            if(validarNombre(edtNombre.text.toString())){
-                if(validarNombre(edtApellido.text.toString())){
-                    if(validarContraseña(edtClave.text.toString())){
-
-                        Toast.makeText(activity, "OK --> mostrar fragment ok", Toast.LENGTH_SHORT).show()
-
-                    }else{
-                        Toast.makeText(activity, "La clave debe tener longitud de más de 8 caracteres y contener almenos una letra minuscula, almenos una letra mayuscula y al menos un caracter especial", Toast.LENGTH_SHORT).show()
-
-                    }
-                }else{
-                    Toast.makeText(activity, "Apellido no cumple", Toast.LENGTH_SHORT).show()
-                }
-            }else{
-                Toast.makeText(activity, "Nombre no cumple", Toast.LENGTH_SHORT).show()
-            }*/
-
 
         }
 
         btnRegresar.setOnClickListener {
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
-                ?.remove(this)
-                ?.commit()
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(R.id.fragmentContainerMain, CreateAccount::class.java, null, "CreateAccount")
+//                ?.remove(this)
+//                ?.commit()
         }
 
 
         btnPoliticaPrivacidad.setOnClickListener {
 
-            //mostrar el fragmento de politica de privacidad
-            activity?.getSupportFragmentManager()?.beginTransaction()
-                ?.setReorderingAllowed(true)
-                ?.replace(
-                    R.id.fragmentContainerMain,
-                    FragmentPoliticaPrivacidad::class.java,
-                    null,
-                    "Ver Politica Privacidad"
-                )
-                ?.addToBackStack("")
-                ?.commit()
+//            //mostrar el fragmento de politica de privacidad
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.setReorderingAllowed(true)
+//                ?.replace(
+//                    R.id.fragmentContainerMain,
+//                    FragmentPoliticaPrivacidad::class.java,
+//                    null,
+//                    "Ver Politica Privacidad"
+//                )
+//                ?.addToBackStack("")
+//                ?.commit()
         }
 
 
@@ -183,47 +153,6 @@ class FragmentCreateAccountDetail : Fragment() {
         return matcher.matches();
     }
 
-/*
-    private fun validarContraseña (pass: String): Boolean {
-        var pattern: Pattern
-        var matcher: Matcher
-
-        val PATRON_CONTRASEÑA = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"
-        pattern = Pattern.compile(PATRON_CONTRASEÑA)
-        matcher = pattern.matcher(pass)
-
-        return matcher.matches();
-    }
-*/
 
 
-/*    private fun verificar(componente: EditText, tipo: String):String{
-
-        if(tipo.equals("nombre")){
-            if(componente.text.toString().isEmpty()){
-                return "Error"
-            }
-        }
-
-    }*/
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentCreateAccountDetail.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentCreateAccountDetail().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
